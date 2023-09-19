@@ -12,7 +12,7 @@ const ShowMore = ({ pageNumber, isNext }: ShowMoreProps) => {
   const handleNavigation = () => {
     const newLimit = (pageNumber + 1) * 10;
     const newPathname = updateSearchParams("limit", `${newLimit}`);
-    router.push(newPathname);
+    router.push(newPathname, { scroll: false });
   };
   return (
     <div className="w-full flex-center gap=5 mt-10">
