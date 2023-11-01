@@ -1,4 +1,5 @@
 import { MouseEventHandler } from "react";
+export * from "./vehicle";
 
 export interface CustomButtonProps {
   title: string;
