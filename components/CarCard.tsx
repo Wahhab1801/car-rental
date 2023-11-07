@@ -4,6 +4,8 @@ import Image from "next/image";
 import { CarProps } from "@/types";
 import { CarDetails, CustomButton } from ".";
 import { useState } from "react";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 interface CarCardProps {
   car: CarProps;
@@ -11,20 +13,23 @@ interface CarCardProps {
 
 const CarCard = ({ car }: CarCardProps) => {
   const {
-    city_mpg,
-    combination_mpg,
-    cylinders,
-    displacement,
-    drive,
-    fuel_type,
-    highway_mpg,
+    // images,
     make,
     model,
-    transmission,
     year,
+    bodyType,
+    mileage,
+    transmission,
+    fuel,
+    owners,
+    price,
+    title,
+    ulezCompliant,
+    condition,
   } = car;
+  const images = ["/hero.png", "/hero.png"]; //TEMp
   const [isOpen, setIsOpen] = useState(false);
-  const carRent = 10;
+  const [currentImage, setCurrentImage] = useState(0);
 
   return (
     <div className="car-card group">
@@ -34,39 +39,57 @@ const CarCard = ({ car }: CarCardProps) => {
         </h2>
       </div>
       <p className="flex mt-6 text-[32px] font-extrabold">
-        <span className="self-start text-[14px] font-semibold">$</span>
-        {carRent}
-        <span className="self-end text-[14px] font-semibold">/day</span>
+        <span className="self-start text-[14px] font-semibold">£</span>
+        {price}
       </p>
-      <div className="relative w-full h-40 my-3">
-        <Image
-          src="/hero.png"
-          alt="car"
-          fill
-          priority
-          className="object-contain"
-        />
+      <Carousel
+        showArrows={true}
+        selectedItem={currentImage}
+        onChange={(index) => setCurrentImage(index)}
+      >
+        {images.map((image, index) => (
+          <div key={index}>
+            <img src={image} alt="Car" />
+          </div>
+        ))}
+      </Carousel>
+      <div className="space-y-2">
+        <p className="text-sm font-semibold leading-tight">{title}</p>
+        <p className="text-xs font-bold inline">
+          {year} ({year % 100} reg ) |
+        </p>
+        <p className="text-xs font-bold inline ml-2">{bodyType} |</p>
+
+        <p className="text-xs font-bold inline ml-2">
+          {owners} owner{owners > 1 ? "s" : ""} |
+        </p>
+        <p className="text-xs font-bold inline ml-2">
+          {ulezCompliant ? "ULEZ.Compliant" : "ULEZ.Non-Compliant"} |
+        </p>
+        <p className="text-xs font-bold inline ml-2">{condition}</p>
       </div>
       <div className="relative flex w-full mt-2">
-        <div className="flex group-hover:invisible w-full justify-between text-gray">
-          <div className="flex flex-col justify-center items-center gap-2">
-            <Image
-              src={"/steering-wheel.svg"}
-              width={20}
-              height={20}
-              alt="steering wheel"
-            />
-            <p className="text-[14px]">
-              {transmission === "a" ? "Automatic" : "Manual"}
-            </p>
-          </div>
+        <div className="flex w-full justify-between text-gray">
           <div className="flex flex-col justify-center items-center gap-2">
             <Image src={"/tire.svg"} width={20} height={20} alt="tire" />
-            <p className="text-[14px]">{drive?.toUpperCase()}</p>
+            <p>{mileage} miles</p>
+          </div>
+          <div className="flex flex-col justify-center items-center gap-2">
+            <div className="flex flex-col justify-center items-center gap-2">
+              <Image
+                src={"/steering-wheel.svg"}
+                width={20}
+                height={20}
+                alt="steering wheel"
+              />
+              <p className="text-[14px]">
+                {transmission === "a" ? "Automatic" : "Manual"}
+              </p>
+            </div>
           </div>
           <div className="flex flex-col justify-center items-center gap-2">
             <Image src={"/gas.svg"} width={20} height={20} alt="gas" />
-            <p className="text-[14px]">{city_mpg} MPG</p>
+            <p>{fuel} Hybrid</p>
           </div>
         </div>
         <div className="car-card__btn-container">
@@ -79,7 +102,6 @@ const CarCard = ({ car }: CarCardProps) => {
           />
         </div>
       </div>
-
       <CarDetails
         isOpen={isOpen}
         closeModal={() => setIsOpen(false)}
