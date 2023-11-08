@@ -17,6 +17,7 @@ export default async function Home({
     limit: searchParams.limit || 10,
   });
   const cars = allCars?.data;
+  console.log("allCars", cars);
   const isDataEmpty = !Array.isArray(cars) || cars.length === 0 || !cars;
 
   return (

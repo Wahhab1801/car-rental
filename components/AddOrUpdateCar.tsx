@@ -1,60 +1,82 @@
-import { useState } from "react";
-import CloudinaryUploadWidget from "./CloudinaryUploader";
-import { Cloudinary } from "@cloudinary/url-gen";
-import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
+// AddOrUpdateCar.js
+import React, { useEffect, useState } from "react";
 import { VehicleForm } from "./VehicleForm";
+import Modal from "./Modal";
+import { fetchCars } from "@/utils";
+import { CarProps } from "@/types";
 
-export default function AddOrUpdateCar() {
-  const [publicId, setPublicId] = useState();
-  // Replace with your own cloud name
-  const [cloudName] = useState("");
-  // Replace with your own upload preset
-  const [uploadPreset] = useState("");
+const AddOrUpdateCar = () => {
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [cars, setCars] = useState<CarProps[]>([]);
 
-  // Upload Widget Configuration
-  // Remove the comments from the code below to add
-  // additional functionality.
-  // Note that these are only a few examples, to see
-  // the full list of possible parameters that you
-  // can add see:
-  //   https://cloudinary.com/documentation/upload_widget_reference
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetchCars();
+        setCars(response.data);
+      } catch (error) {
+        console.error("Error fetching cars:", error);
+      }
+    }
 
-  const [uwConfig] = useState({
-    cloudName,
-    uploadPreset,
-    cropping: true, //add a cropping step
-    // showAdvancedOptions: true,  //add advanced options (public_id and tag)
-    // sources: [ "local", "url"], // restrict the upload sources to URL and local files
-    // multiple: false,  //restrict upload to a single file
-    // folder: "user_images", //upload files to the specified folder
-    // tags: ["users", "profile"], //add the given tags to the uploaded files
-    // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
-    // clientAllowedFormats: ["images"], //restrict uploading to image files only
-    // maxImageFileSize: 2000000,  //restrict file size to less than 2MB
-    // maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
-    // theme: "purple", //change to a purple theme
-  });
+    fetchData();
+  }, []);
 
-  // Create a Cloudinary instance and set your cloud name.
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName,
-    },
-  });
+  const openFormModal = () => {
+    setIsFormOpen(true);
+  };
 
-  const myImage = cld.image(publicId);
+  const closeFormModal = () => {
+    setIsFormOpen(false);
+  };
 
   return (
     <div className="AddOrUpdateCar">
-      <VehicleForm />
-      <CloudinaryUploadWidget uwConfig={uwConfig} setPublicId={setPublicId} />
-      <div style={{ width: "800px" }}>
-        <AdvancedImage
-          style={{ maxWidth: "50%" }}
-          cldImg={myImage}
-          plugins={[responsive(), placeholder()]}
-        />
+      <div className="p-4">
+        <button
+          onClick={openFormModal}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
+        >
+          Add Vehicle
+        </button>{" "}
+        <div className="p-4">
+          <Modal isOpen={isFormOpen} closeModal={closeFormModal}>
+            <VehicleForm />{" "}
+          </Modal>
+        </div>
+      </div>
+      <div className="overflow-x-auto p-4">
+        <table className="min-w-full bg-white">
+          <thead>
+            <tr>
+              <th className="text-left">ID</th>
+              <th className="text-left">Make</th>
+              <th className="text-left">Model</th>
+              <th className="text-left">Registration</th>
+              <th className="text-left">Sold</th>
+              <th className="text-left">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cars.map((car) => (
+              <tr key={car.id}>
+                <td>{car.id}</td>
+                <td>{car.make}</td>
+                <td>{car.model}</td>
+                <td>{car.registration}</td>
+                <td>{car.sold ? "Yes" : "No"}</td>
+                <td>
+                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Update
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
-}
+};
+
+export default AddOrUpdateCar;

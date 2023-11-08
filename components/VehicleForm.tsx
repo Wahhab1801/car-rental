@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { Vehicle } from "../types"; // Import the Vehicle type
+import { Vehicle } from "../types";
 import "tailwindcss/tailwind.css";
+import { Cloudinary } from "@cloudinary/url-gen";
+import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
+import CloudinaryUploadWidget from "./CloudinaryUploader";
 
 interface VehicleFormProps {
   vehicle?: Vehicle; // Pass the existing vehicle data for editing, if available
@@ -8,6 +11,23 @@ interface VehicleFormProps {
 
 export const VehicleForm: React.FC<VehicleFormProps> = ({ vehicle }) => {
   const [formData, setFormData] = useState<Vehicle>(vehicle || {});
+  const [publicIds, setPublicIds] = useState([]);
+  const [cloudName] = useState("dr815brzr");
+  const [uploadPreset] = useState("l1hxt0ta");
+  const [uwConfig] = useState({
+    cloudName,
+    uploadPreset,
+    cropping: true,
+    multiple: true,
+  });
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName,
+    },
+  });
+
+  console.log("formData", formData);
+  console.log("publicIds", publicIds);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -21,30 +41,16 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({ vehicle }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      if (vehicle) {
-        const updated = {
-          ...formData,
-          ulezCompliant: formData?.ulezCompliant == "true",
-          sold: formData?.sold == "true",
-          unlist: formData.unlist == "true",
-        } as Vehicle;
-        // Edit existing vehicle
-        // await prisma.vehicles.update({
-        //   where: { id: vehicle.id },
-        //   data: formData,
-        // });
-      } else {
-        const newVehicle = {
-          ...formData,
-          ulezCompliant: formData?.ulezCompliant == "true",
-          sold: formData?.sold == "true",
-          unlist: formData.unlist == "true",
-        } as Vehicle;
-        // Create a new vehicle
-        // await prisma.vehicles.create({
-        //   data: formData,
-        // });
-      }
+      const newVehicle = {
+        ...formData,
+        ulezCompliant: formData?.ulezCompliant == "true",
+        sold: formData?.sold == "true",
+        unlist: formData.unlist == "true",
+      } as Vehicle;
+      // Create a new vehicle
+      // await prisma.vehicles.create({
+      //   data: formData,
+      // });
       // Redirect to the vehicle list page or perform other actions as needed
     } catch (error) {
       console.error(error);
@@ -424,6 +430,28 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({ vehicle }) => {
           onChange={handleChange}
           className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
+      </div>
+      <div className="mt-4">
+        <label
+          htmlFor="emissionClass"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Images
+        </label>
+        <CloudinaryUploadWidget
+          uwConfig={uwConfig}
+          setPublicIds={setPublicIds}
+        />
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
+          {publicIds.map((publicId) => (
+            <div key={publicId} style={{ margin: "8px", maxWidth: "200px" }}>
+              <AdvancedImage
+                cldImg={cld.image(publicId)}
+                plugins={[responsive(), placeholder()]}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="mt-6">

@@ -6,6 +6,8 @@ import { CarDetails, CustomButton } from ".";
 import { useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
+import { Cloudinary } from "@cloudinary/url-gen";
 
 interface CarCardProps {
   car: CarProps;
@@ -13,7 +15,7 @@ interface CarCardProps {
 
 const CarCard = ({ car }: CarCardProps) => {
   const {
-    // images,
+    images,
     make,
     model,
     year,
@@ -27,10 +29,16 @@ const CarCard = ({ car }: CarCardProps) => {
     ulezCompliant,
     condition,
   } = car;
-  const images = ["/hero.png", "/hero.png"]; //TEMp
+  console.log("car", car);
+  console.log("images", images);
+
   const [isOpen, setIsOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
-
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: "dr815brzr",
+    },
+  });
   return (
     <div className="car-card group">
       <div className="car-card__content">
@@ -49,7 +57,10 @@ const CarCard = ({ car }: CarCardProps) => {
       >
         {images.map((image, index) => (
           <div key={index}>
-            <img src={image} alt="Car" />
+            <AdvancedImage
+              cldImg={cld.image(image.url)}
+              plugins={[responsive(), placeholder()]}
+            />
           </div>
         ))}
       </Carousel>
@@ -89,7 +100,7 @@ const CarCard = ({ car }: CarCardProps) => {
           </div>
           <div className="flex flex-col justify-center items-center gap-2">
             <Image src={"/gas.svg"} width={20} height={20} alt="gas" />
-            <p>{fuel} Hybrid</p>
+            <p>{fuel}</p>
           </div>
         </div>
         <div className="car-card__btn-container">

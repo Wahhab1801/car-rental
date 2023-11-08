@@ -1,7 +1,10 @@
 import { CarProps, FilterCarProps } from "@/types";
 
-export const fetchCars = async (filters: FilterCarProps) => {
-  const response = await fetch(`https://motech-backend.vercel.app/vehicles`)
+export const fetchCars = async (filters?: FilterCarProps) => {
+ const response = await fetch(`http://localhost:3001/vehicles`)
+    // const response = await fetch(` https://motech-backend.vercel.app/vehicles?skip=0`)
+
+  console.log('response', response)
   const result = await response.json();
   return result;
 };

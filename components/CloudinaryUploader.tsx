@@ -1,23 +1,20 @@
 import { createContext, useEffect, useState } from "react";
 
-// Create a context to manage the script loading state
 const CloudinaryScriptContext = createContext({});
 
 function CloudinaryUploadWidget({
   uwConfig,
-  setPublicId,
+  setPublicIds,
 }: {
   uwConfig: any;
-  setPublicId: any;
+  setPublicIds: any;
 }) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    // Check if the script is already loaded
     if (!loaded) {
       const uwScript = document.getElementById("uw");
       if (!uwScript) {
-        // If not loaded, create and load the script
         const script = document.createElement("script");
         script.setAttribute("async", "");
         script.setAttribute("id", "uw");
@@ -25,7 +22,6 @@ function CloudinaryUploadWidget({
         script.addEventListener("load", () => setLoaded(true));
         document.body.appendChild(script);
       } else {
-        // If already loaded, update the state
         setLoaded(true);
       }
     }
@@ -33,15 +29,23 @@ function CloudinaryUploadWidget({
 
   const initializeCloudinaryWidget = () => {
     if (loaded) {
-      var myWidget = (window as any)?.cloudinary?.createUploadWidget(
+      const myWidget = (window as any)?.cloudinary?.createUploadWidget(
         uwConfig,
         (error: any, result: any) => {
           if (!error && result && result.event === "success") {
             console.log("Done! Here is the image info: ", result.info);
-            setPublicId(result.info.public_id);
+            setPublicIds((prevPublicIds: string[]) => [
+              ...prevPublicIds,
+              result.info.public_id,
+            ]);
           }
         }
       );
+
+      myWidget.update({
+        showAdvancedOptions: true,
+        multiple: true,
+      });
 
       document.getElementById("upload_widget")?.addEventListener(
         "click",
