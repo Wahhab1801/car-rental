@@ -58,7 +58,7 @@ const CarCard = ({ car }: CarCardProps) => {
         {images.map((image, index) => (
           <div key={index}>
             <AdvancedImage
-              cldImg={cld.image(image.url)}
+              cldImg={cld.image(image)}
               plugins={[responsive(), placeholder()]}
             />
           </div>
@@ -75,9 +75,8 @@ const CarCard = ({ car }: CarCardProps) => {
           {owners} owner{owners > 1 ? "s" : ""} |
         </p>
         <p className="text-xs font-bold inline ml-2">
-          {ulezCompliant ? "ULEZ.Compliant" : "ULEZ.Non-Compliant"} |
+          {ulezCompliant ? "ULEZ.Compliant" : "ULEZ.Non-Compliant"}
         </p>
-        <p className="text-xs font-bold inline ml-2">{condition}</p>
       </div>
       <div className="relative flex w-full mt-2">
         <div className="flex w-full justify-between text-gray">

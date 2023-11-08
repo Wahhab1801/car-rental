@@ -16,7 +16,7 @@ export interface SearchManufacturerProps {
   setManufacturer: (manufacturer: string) => void;
 }
 export interface CarProps {
-    images: {url: string}[];
+    images:  string[];
     id: string;
     make: string;
     model: string;
