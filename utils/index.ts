@@ -1,16 +1,10 @@
 import { CarProps, FilterCarProps } from "@/types";
 
-export const fetchCars = async (filters: FilterCarProps) => {
-  const headers = {
-    "X-RapidAPI-Key": "cf30120f9amsh82f6df583ebe966p13c03ejsne2b394f52ae7",
-    "X-RapidAPI-Host": "cars-by-api-ninjas.p.rapidapi.com",
-  };
-  const response = await fetch(
-    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${filters.manufacturer}&year=${filters.year}&fuel_type=${filters.fuel}&limit=${filters.limit}&model=${filters.model}`,
-    {
-      headers: headers,
-    }
-  );
+export const fetchCars = async (filters?: FilterCarProps) => {
+//  const response = await fetch(`http://localhost:3001/vehicles`)
+    const response = await fetch(` https://motech-backend.vercel.app/vehicles?skip=0`)
+
+  console.log('response', response)
   const result = await response.json();
   return result;
 };
