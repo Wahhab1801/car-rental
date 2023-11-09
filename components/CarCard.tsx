@@ -4,6 +4,7 @@ import Image from "next/image";
 import { CarProps } from "@/types";
 import { CarDetails, CustomButton } from ".";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface CarCardProps {
   car: CarProps;
@@ -24,7 +25,18 @@ const CarCard = ({ car }: CarCardProps) => {
     year,
   } = car;
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
   const carRent = 10;
+  console.log(car);
+
+  const handleClick = () => {
+    // setIsOpen(true);
+    const id = Math.random().toString(36).substr(2, 9);
+
+    let carObject = { ...car, images: ["/hero.png", "/hero.png", "/hero.png"] };
+    localStorage.setItem(id, JSON.stringify(carObject));
+    router.push(`/details/${id}`);
+  };
 
   return (
     <div className="car-card group">
@@ -75,7 +87,8 @@ const CarCard = ({ car }: CarCardProps) => {
             containerStyles="w-full py-[16px] rounded-full bg-primary-blue"
             textStyles="text-white text-[14px] leading-[14px] font-bold"
             rightIcon="/right-arrow.svg"
-            handleClick={() => setIsOpen(true)}
+            // handleClick={() => setIsOpen(true)}
+            handleClick={handleClick}
           />
         </div>
       </div>

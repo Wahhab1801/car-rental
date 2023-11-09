@@ -1,4 +1,5 @@
 import { CarProps, FilterCarProps } from "@/types";
+import { ReadonlyURLSearchParams } from "next/navigation";
 
 export const fetchCars = async (filters: FilterCarProps) => {
   const headers = {
@@ -39,4 +40,29 @@ export const updateSearchParams = (type: string, value: string) => {
 
   const newPathName = `${window.location.pathname}?${params.toString()}`;
   return newPathName;
+};
+
+export const fetchCarDetails = async (id: string) => {
+  const headers = {
+    "X-RapidAPI-Key": "cf30120f9amsh82f6df583ebe966p13c03ejsne2b394f52ae7",
+    "X-RapidAPI-Host": "cars-by-api-ninjas.p.rapidapi.com",
+  };
+  const response = await fetch(
+    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars/${id}`,
+    {
+      headers: headers,
+    }
+  );
+  const result = await response.json();
+  return result;
+};
+
+export const createUrl = (
+  pathname: string,
+  params: URLSearchParams | ReadonlyURLSearchParams
+) => {
+  const paramsString = params.toString();
+  const queryString = `${paramsString.length ? "?" : ""}${paramsString}`;
+
+  return `${pathname}${queryString}`;
 };

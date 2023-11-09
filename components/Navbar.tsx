@@ -6,16 +6,17 @@ import { CustomButton } from ".";
 
 const Navbar = () => {
   return (
-    <section className="w-full absolute z-10">
+    <header className="w-full absolute z-10">
       <nav className="max-w-[1440px] mx-auto flex justify-between items-center sm:px-16 px-6 py-4">
-        <Link href="/" className="flex justify-center items-center">
+        <Link href="/" className="flex justify-center items-center h-[50px]">
           <Image
-            src="/logo.svg"
+            src="/car.png"
             alt="Car Rental Logo"
             width={118}
-            height={18}
-            className="object-contain"
+            height={50}
+            className="object-contain mt-[5px]"
           />
+          <h1 className="text-[30px]">Motech Motors</h1>
         </Link>
 
         <CustomButton
@@ -24,7 +25,7 @@ const Navbar = () => {
           btnType="button"
         />
       </nav>
-    </section>
+    </header>
   );
 };
 

@@ -100,3 +100,9 @@ export const manufacturers = [
     },
   ];
   
+
+export const some_random_images = [
+  "https://cdn.shopify.com/s/files/1/0754/3727/7491/files/t-shirt-1.png?v=1689798965&w=1200&q=75",
+  "https://cdn.shopify.com/s/files/1/0754/3727/7491/files/t-shirt-2.png?v=1689798965&w=1200&q=75",
+  "https://cdn.shopify.com/s/files/1/0754/3727/7491/files/t-shirt-circles-blue.png?v=1690003396&w=1200&q=75",
+]
