@@ -11,7 +11,7 @@ const Navbar = () => {
         <Link href="/" className="flex justify-center items-center h-[50px]">
           <Image
             src="/car.png"
-            alt="Car Rental Logo"
+            alt="Motech MotorsLogo"
             width={118}
             height={50}
             className="object-contain mt-[5px]"

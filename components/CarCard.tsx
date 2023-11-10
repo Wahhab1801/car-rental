@@ -1,20 +1,22 @@
 "use client";
 
 import Image from "next/image";
-import { CarProps } from "@/types";
+import { Vehicle } from "@/types";
 import { CarDetails, CustomButton } from ".";
 import { useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/url-gen";
+import { useRouter } from "next/navigation";
 
 interface CarCardProps {
-  car: CarProps;
+  car: Vehicle;
 }
 
 const CarCard = ({ car }: CarCardProps) => {
   const {
+    id,
     images,
     make,
     model,
@@ -29,8 +31,8 @@ const CarCard = ({ car }: CarCardProps) => {
     ulezCompliant,
     condition,
   } = car;
-  console.log("car", car);
-  console.log("images", images);
+
+  const router = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
@@ -39,6 +41,11 @@ const CarCard = ({ car }: CarCardProps) => {
       cloudName: "dr815brzr",
     },
   });
+
+  const handleClick = () => {
+    router.push(`/details/${id}`);
+  };
+
   return (
     <div className="car-card group">
       <div className="car-card__content">
@@ -55,7 +62,7 @@ const CarCard = ({ car }: CarCardProps) => {
         selectedItem={currentImage}
         onChange={(index) => setCurrentImage(index)}
       >
-        {images.map((image, index) => (
+        {images?.map((image, index) => (
           <div key={index}>
             <AdvancedImage
               cldImg={cld.image(image)}
@@ -66,14 +73,18 @@ const CarCard = ({ car }: CarCardProps) => {
       </Carousel>
       <div className="space-y-2">
         <p className="text-sm font-semibold leading-tight">{title}</p>
-        <p className="text-xs font-bold inline">
-          {year} ({year % 100} reg ) |
-        </p>
+        {year && (
+          <p className="text-xs font-bold inline">
+            {year} ({year % 100} reg ) |
+          </p>
+        )}
         <p className="text-xs font-bold inline ml-2">{bodyType} |</p>
 
-        <p className="text-xs font-bold inline ml-2">
-          {owners} owner{owners > 1 ? "s" : ""} |
-        </p>
+        {owners && (
+          <p className="text-xs font-bold inline ml-2">
+            {owners} owner{owners > 1 ? "s" : ""} |
+          </p>
+        )}
         <p className="text-xs font-bold inline ml-2">
           {ulezCompliant ? "ULEZ.Compliant" : "ULEZ.Non-Compliant"}
         </p>
@@ -105,7 +116,7 @@ const CarCard = ({ car }: CarCardProps) => {
         <div className="car-card__btn-container">
           <CustomButton
             title="View More"
-            containerStyles="w-full py-[16px] rounded-full bg-primary-blue"
+            containerStyles="w-full py-[16px] rounded-full bg-primary-blue shadow-xl opacity-100"
             textStyles="text-white text-[14px] leading-[14px] font-bold"
             rightIcon="/right-arrow.svg"
             // handleClick={() => setIsOpen(true)}

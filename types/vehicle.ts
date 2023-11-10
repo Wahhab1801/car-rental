@@ -21,4 +21,8 @@ export type Vehicle = {
   year?: number;
   mileage?: number;
   emissionClass?: string;
+  images: string[];
+  condition?: string;
+  createdAt?: string;
+  updatedAt?: string;
 };

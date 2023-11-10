@@ -2,10 +2,20 @@ import { CarProps, FilterCarProps } from "@/types";
 import { ReadonlyURLSearchParams } from "next/navigation";
 
 export const fetchCars = async (filters?: FilterCarProps) => {
-//  const response = await fetch(`http://localhost:3001/vehicles`)
-    const response = await fetch(` https://motech-backend.vercel.app/vehicles?skip=0`)
+  //  const response = await fetch(`http://localhost:3001/vehicles`)
+  const response = await fetch(
+    ` https://motech-backend.vercel.app/vehicles?skip=0`
+  );
 
-  console.log('response', response)
+  console.log("response", response);
+  const result = await response.json();
+  return result;
+};
+
+export const fetchCar = async (id: string) => {
+  const response = await fetch(
+    `https://motech-backend.vercel.app/vehicles/${id}`
+  );
   const result = await response.json();
   return result;
 };

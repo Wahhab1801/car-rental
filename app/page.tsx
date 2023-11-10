@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { CarCard, CustomFilter, Hero, SearchBar, ShowMore } from "@/components";
 import { fetchCars } from "@/utils";
-import { FilterCarProps } from "@/types";
+import { FilterCarProps, Vehicle } from "@/types";
 import { fuels, yearsOfProduction } from "@/constants";
 
 export default async function Home({
@@ -16,7 +16,7 @@ export default async function Home({
     year: searchParams.year || "2021",
     limit: searchParams.limit || 10,
   });
-  const cars = allCars?.data;
+  const cars: Vehicle[] | { message: string } = allCars?.data;
   console.log("allCars", cars);
   const isDataEmpty = !Array.isArray(cars) || cars.length === 0 || !cars;
 
