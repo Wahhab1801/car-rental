@@ -1,6 +1,8 @@
+import React from "react";
+import { cloudinaryCloudName } from "@/constants";
 import { AdvancedImage, placeholder, responsive } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/url-gen/index";
-import React from "react";
+import { Carousel } from "react-responsive-carousel";
 
 type Props = {
   images: string[];
@@ -12,7 +14,7 @@ const GalleryNew = (props: Props) => {
   const [currentImage, setCurrentImage] = React.useState(0);
   const cld = new Cloudinary({
     cloud: {
-      cloudName: "dr815brzr",
+      cloudName: cloudinaryCloudName,
     },
   });
 
@@ -20,18 +22,31 @@ const GalleryNew = (props: Props) => {
     <div>
       <div className="grid gap-4">
         <div className="bg-gray-100 rounded-xl flex justify-center items-center shadow">
-          {images && (
-            <AdvancedImage
-              cldImg={cld.image(images[currentImage])}
-              plugins={[responsive(), placeholder()]}
-              className="h-96 max-w-full rounded-lg"
-            />
-          )}
+          <Carousel
+            showArrows={true}
+            selectedItem={currentImage}
+            onChange={(index: number) => setCurrentImage(index)}
+            className="h-auto max-w-full rounded-lg"
+          >
+            {images &&
+              images.map((image, index) => (
+                <AdvancedImage
+                  key={index}
+                  cldImg={cld.image(image)}
+                  plugins={[responsive(), placeholder()]}
+                  className="h-auto max-w-full rounded-lg"
+                />
+              ))}
+          </Carousel>
         </div>
         <div className="flex justify-center gap-2">
           {images &&
             images.map((image, index) => (
-              <div className="rounded-xl flex justify-center items-center h-32 w-48 bg-gray-100 cursor-pointer hover:bg-gray-200 hover:shadow-md">
+              <div
+                className={`rounded-xl flex justify-center items-center h-32 w-48 bg-gray-100 cursor-pointer hover:bg-gray-200 hover:shadow-md ${
+                  currentImage === index ? "border border-gray-500" : ""
+                }`}
+              >
                 <AdvancedImage
                   cldImg={cld.image(image)}
                   plugins={[responsive(), placeholder()]}

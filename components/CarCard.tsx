@@ -9,6 +9,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { useRouter } from "next/navigation";
+import { cloudinaryCloudName } from "@/constants";
 
 interface CarCardProps {
   car: Vehicle;
@@ -38,7 +39,7 @@ const CarCard = ({ car }: CarCardProps) => {
   const [currentImage, setCurrentImage] = useState(0);
   const cld = new Cloudinary({
     cloud: {
-      cloudName: "dr815brzr",
+      cloudName: cloudinaryCloudName,
     },
   });
 

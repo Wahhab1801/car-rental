@@ -4,30 +4,30 @@ import "tailwindcss/tailwind.css";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
 import CloudinaryUploadWidget from "./CloudinaryUploader";
+import { cloudinaryCloudName } from "@/constants";
 
 interface VehicleFormProps {
   vehicle?: Vehicle; // Pass the existing vehicle data for editing, if available
 }
 
 export const VehicleForm: React.FC<VehicleFormProps> = ({ vehicle }) => {
-  const [formData, setFormData] = useState<Vehicle>(vehicle || {});
+  const [formData, setFormData] = useState<Vehicle>(vehicle || ({} as Vehicle));
   const [publicIds, setPublicIds] = useState([]);
-  const [cloudName] = useState("dr815brzr");
   const [uploadPreset] = useState("l1hxt0ta");
   const [uwConfig] = useState({
-    cloudName,
+    cloudinaryCloudName,
     uploadPreset,
     cropping: true,
     multiple: true,
   });
   const cld = new Cloudinary({
     cloud: {
-      cloudName,
+      cloudName: cloudinaryCloudName,
     },
   });
 
-  console.log("formData", formData);
-  console.log("publicIds", publicIds);
+  // console.log("formData", formData);
+  // console.log("publicIds", publicIds);
 
   const handleChange = (
     e: React.ChangeEvent<
