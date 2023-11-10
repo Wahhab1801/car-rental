@@ -15,20 +15,33 @@ export interface SearchManufacturerProps {
   manufacturer: string;
   setManufacturer: (manufacturer: string) => void;
 }
-
 export interface CarProps {
-  city_mpg: number;
-  class: string;
-  combination_mpg: number;
-  cylinders: number;
-  displacement: number;
-  drive: string;
-  fuel_type: string;
-  highway_mpg: number;
-  make: string;
-  model: string;
-  transmission: string;
-  year: number;
+    images:  string[];
+    id: string;
+    make: string;
+    model: string;
+    title: string;
+    colour: string;
+    description: string;
+    vehicleCategory: string;
+    ulezCompliant: boolean;
+    doors: number;
+    seats: number;
+    dateOfRegistration: string;
+    registration: string;
+    price: number;
+    sold: boolean;
+    unlist: boolean;
+    bodyType: string;
+    fuel: string;
+    transmission: string;
+    owners: number;
+    year: number;
+    mileage: number;
+    emissionClass: string;
+    condition: string;
+    createdAt: string;
+    updatedAt: string;
 }
 export interface CarDetailsProps {
   car: CarProps;
@@ -58,3 +71,28 @@ export interface ShowMoreProps {
   pageNumber: number;
   isNext: boolean;
 }
+
+export type Vehicle = {
+  id?: string;
+  make?: string;
+  model?: string;
+  title?: string;
+  colour?: string;
+  description?: string;
+  vehicleCategory?: string;
+  ulezCompliant?: boolean | string;
+  doors?: number;
+  seats?: number;
+  dateOfRegistration?: string | null;
+  registration?: string;
+  price?: number;
+  sold?: boolean | string;
+  unlist?: boolean | string;
+  bodyType?: string;
+  fuel?: string;
+  transmission?: string;
+  owners?: number | null;
+  year?: number;
+  mileage?: number;
+  emissionClass?: string;
+};
