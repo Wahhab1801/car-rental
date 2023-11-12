@@ -9,7 +9,7 @@ type Props = {
 };
 
 const GalleryNew = (props: Props) => {
-  console.log("GalleryNew: ", props);
+  console.log("GalleryNew: ", props, cloudinaryCloudName);
   const { images } = props;
   const [currentImage, setCurrentImage] = React.useState(0);
   const cld = new Cloudinary({

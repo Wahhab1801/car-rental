@@ -4,7 +4,7 @@ import { ReadonlyURLSearchParams } from "next/navigation";
 export const fetchCars = async (filters?: FilterCarProps) => {
   //  const response = await fetch(`http://localhost:3001/vehicles?skip=1`)
   const response = await fetch(
-    ` https://motech-backend.vercel.app/vehicles?skip=0`
+    `https://motech-backend.vercel.app/vehicles?skip=0`
   );
 
   console.log("response", response);
@@ -33,7 +33,7 @@ export const generateCarImages = (car: Vehicle, angle?: string) => {
   url.searchParams.append("zoomType", "fullscreen");
   url.searchParams.append("modelYear", `${year}`);
   // url.searchParams.append('zoomLevel', zoomLevel);
-  url.searchParams.append("angle", `${angle}`);
+  // url.searchParams.append("angle", `${angle}`);
 
   return `${url}`;
 };
