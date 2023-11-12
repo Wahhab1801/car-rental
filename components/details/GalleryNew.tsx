@@ -26,7 +26,8 @@ const GalleryNew = (props: Props) => {
             showArrows={true}
             selectedItem={currentImage}
             onChange={(index: number) => setCurrentImage(index)}
-            className="h-auto max-w-full rounded-lg"
+            className="h-[480px] max-w-full rounded-lg"
+            showThumbs={false}
           >
             {images &&
               images.map((image, index) => (

@@ -68,6 +68,22 @@ export const fuels = [
     title: "Electricity",
     value: "Electricity",
   },
+  {
+    title: "Hybrid",
+    value: "Hybrid",
+  },
+  {
+    title: "Diesel",
+    value: "Diesel",
+  },
+  {
+    title: "Petrol Hybrid",
+    value: "Petrol Hybrid",
+  },
+  {
+    title: "Petrol",
+    value: "Petrol",
+  },
 ];
 
 export const footerLinks = [
@@ -106,4 +122,5 @@ export const some_random_images = [
   "https://cdn.shopify.com/s/files/1/0754/3727/7491/files/t-shirt-circles-blue.png?v=1690003396&w=1200&q=75",
 ];
 
-export const cloudinaryCloudName = process.env.CLOUDINARY_CLOUD_NAME;
+export const cloudinaryCloudName =
+  process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;

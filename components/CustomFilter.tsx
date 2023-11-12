@@ -14,6 +14,7 @@ const CustomFilter = ({ title, options }: CustomFilterProps) => {
   const handleFilter = (e: React.FormEvent<HTMLFormElement>) => {};
 
   const hanldeUpdateParams = (e: { title: string; value: string }) => {
+    if (!e?.value) return;
     const newPathName = updateSearchParams(title, e.value.toLowerCase());
 
     router.push(newPathName, { scroll: false });
