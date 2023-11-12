@@ -38,7 +38,7 @@ const MainPage = (props: Props) => {
   return (
     <>
       {!isDataEmpty ? (
-        <section>
+        <section id="cars">
           <div className="home__cars-wrapper">
             {cars.map((car) => (
               <CarCard car={car} />
@@ -51,7 +51,7 @@ const MainPage = (props: Props) => {
           />
         </section>
       ) : (
-        <section className="home__error-container">
+        <section id="cars" className="home__error-container">
           <h2 className="text-black text-xl font-bold">Oops, no results</h2>
           {data?.message && <p>{data?.message}</p>}
         </section>
