@@ -9,6 +9,7 @@ import { Vehicle } from "@/types";
 const AddOrUpdateCar = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [cars, setCars] = useState<Vehicle[]>([]);
+  const [selectedCar, setSelectedCar] = useState<Vehicle | undefined>();
 
   useEffect(() => {
     async function fetchData() {
@@ -23,7 +24,8 @@ const AddOrUpdateCar = () => {
     fetchData();
   }, []);
 
-  const openFormModal = () => {
+  const openFormModal = (car?: Vehicle) => {
+    setSelectedCar(car);
     setIsFormOpen(true);
   };
 
@@ -36,14 +38,18 @@ const AddOrUpdateCar = () => {
       <div className="mt-20 padding-x padding-y max-width">
         <div className="p-4">
           <button
-            onClick={openFormModal}
+            onClick={() => openFormModal()}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4 self-end"
           >
             Add Vehicle
           </button>
           <div className="p-4">
-            <Modal isOpen={isFormOpen} closeModal={closeFormModal}>
-              <VehicleForm />
+            <Modal
+              header={selectedCar ? "Update Vehicle" : "Add Vehicle"}
+              isOpen={isFormOpen}
+              closeModal={closeFormModal}
+            >
+              <VehicleForm vehicle={selectedCar} closeModal={closeFormModal} />
             </Modal>
           </div>
         </div>
@@ -68,7 +74,10 @@ const AddOrUpdateCar = () => {
                   <td>{car.registration}</td>
                   <td>{car.sold ? "Yes" : "No"}</td>
                   <td>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      onClick={() => openFormModal(car)}
+                    >
                       Update
                     </button>
                   </td>

@@ -3,18 +3,9 @@ import { Vehicle, FilterCarProps } from "@/types";
 import { ReadonlyURLSearchParams } from "next/navigation";
 
 export const fetchCars = async (filters?: FilterCarProps) => {
-  const params = new URLSearchParams();
-
-  if (filters?.manufacturer)
-    params.append("manufacturer", filters.manufacturer);
-  if (filters?.model) params.append("model", filters.model);
-  if (filters?.fuel) params.append("fuel", filters.fuel);
-  if (filters!["year[gte]"]) params.append("year", filters!["year[gte]"]);
-
+  //  const response = await fetch(`http://localhost:3001/vehicles`)
   const response = await fetch(
-    `https://motech-backend.vercel.app/vehicles?skip=0${
-      params ? params.toString() : ""
-    }`
+    'https://motech-backend.vercel.app/vehicles?skip=0'
   );
 
   const result = await response.json();
@@ -46,7 +37,7 @@ export const fetchCarsAxios = (filters: FilterCarProps) => {
     params.append("manufacturer", filters.manufacturer);
   if (filters?.condition) params.append("make", filters.condition);
   if (filters?.make) params.append("make", filters.make);
-  if (filters?.model) params.append("model", filters.model);
+  if (filters?.model) params.append("modelFamily", filters.model);
   if (filters?.fuel) params.append("fuel", filters.fuel);
   if (filters!["year[gte]"]) params.append("year[gte]", filters!["year[gte]"]);
   return axios.get(

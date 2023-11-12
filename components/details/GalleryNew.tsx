@@ -14,7 +14,7 @@ const GalleryNew = (props: Props) => {
   const [currentImage, setCurrentImage] = React.useState(0);
   const cld = new Cloudinary({
     cloud: {
-      cloudName: cloudinaryCloudName,
+      cloudName: "dr815brzr",
     },
   });
 

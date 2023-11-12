@@ -90,7 +90,7 @@ const Description = (props: Props) => {
       </div>
 
       <Modal
-        title="Contact Us for details"
+        header="Contact Us for details"
         isOpen={isFormOpen}
         closeModal={closeFormModal}
       >
