@@ -21,7 +21,6 @@ const Navbar = () => {
           />
           <h1 className="text-[30px]">Motech Motors</h1>
         </Link>
-
         {/* <CustomButton
           title="Sign In"
           containerStyles="bg-primary-blue rounded-full bg-white min-w-[130px]"
@@ -52,7 +51,24 @@ const Navbar = () => {
           >
             About Us
           </Link>
+          <Link
+            href="/contact-us"
+            style={{
+              color: pathname.endsWith("/contact-us") ? "black" : "white",
+              ...(pathname.endsWith("/contact-us") && {
+                textDecoration: "underline",
+              }),
+            }}
+            className="mx-4 hover:underline underline-offset-4"
+          >
+            Contact Us
+          </Link>
         </div>
+        {pathname?.includes("/details/") &&
+        <div className="w-[40%] absolute h-[85px] right-0 overflow-hidden -z-10">
+          <div className="absolute -bottom-2 xl:-right-[50px] rotate-[4deg] -right-1/4 bg-hero-bg bg-repeat-round -z-10 w-full xl:h-[100vh] h-[100vh] overflow-hidden" />
+         </div>
+}
       </nav>
     </header>
   );

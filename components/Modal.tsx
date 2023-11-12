@@ -5,9 +5,15 @@ interface ModalProps {
   isOpen: boolean;
   closeModal: () => void;
   children: ReactNode;
+  title?: string;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, closeModal, children }) => {
+const Modal: React.FC<ModalProps> = ({
+  title,
+  isOpen,
+  closeModal,
+  children,
+}) => {
   return (
     <div
       className={`fixed inset-0 flex items-center justify-center z-50 ${
@@ -23,7 +29,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, closeModal, children }) => {
           className="absolute top-4 left-2 text-lg font-bold inline"
           onClick={closeModal}
         >
-          Add Vehicle
+          {title ?? "Add Vehicle"}
         </p>
         <button
           className="absolute top-4 right-2 text-gray-600 hover:text-gray-800"

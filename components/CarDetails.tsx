@@ -38,7 +38,7 @@ const CarDetails = ({ car, isOpen, closeModal }: CarDetailsProps) => {
                 <Dialog.Panel className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto transform rounded-2xl bg-white p-6 text-left shadow-xl transition-all flex flex-col gap-5">
                   <button
                     type="button"
-                    className="absolute top-2 right-2 z-10 w-fit p-2 bg-primary-blue-100 rounded-full"
+                    className="absolute top-2 right-2 z-10 w-fit p-2 bg-primary-100 rounded-full"
                     onClick={closeModal}
                   >
                     <Image
@@ -60,7 +60,7 @@ const CarDetails = ({ car, isOpen, closeModal }: CarDetailsProps) => {
                       />
                     </div>
                     <div className="flex gap-3">
-                      <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
+                      <div className="flex-1 relative w-full h-24 bg-primary-100 rounded-lg">
                         <Image
                           src="/hero.png"
                           alt="car"
@@ -69,7 +69,7 @@ const CarDetails = ({ car, isOpen, closeModal }: CarDetailsProps) => {
                           className="object-contain"
                         />
                       </div>
-                      <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
+                      <div className="flex-1 relative w-full h-24 bg-primary-100 rounded-lg">
                         <Image
                           src="/hero.png"
                           alt="car"
@@ -78,7 +78,7 @@ const CarDetails = ({ car, isOpen, closeModal }: CarDetailsProps) => {
                           className="object-contain"
                         />
                       </div>
-                      <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
+                      <div className="flex-1 relative w-full h-24 bg-primary-100 rounded-lg">
                         <Image
                           src="/hero.png"
                           alt="car"

@@ -23,7 +23,7 @@ const Hero = () => {
         <Link href={pathname === "/" ? "#cars" : "/"}>
           <CustomButton
             title="Explore Cars"
-            containerStyles="bg-primary-blue text-white rounded-full mt-10"
+            containerStyles="bg-primary  text-white rounded-full mt-10"
             handleClick={handleScroll}
           />
         </Link>

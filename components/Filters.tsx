@@ -29,7 +29,7 @@ const Filters = (props: Props) => {
       {Object.keys(searchParams).length > 0 && (
         <button
           onClick={handleOnClear}
-          className="flex justify-center items-center w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 hover:shadow-xl shadow-lg"
+          className="flex justify-center items-center w-9 h-9 rounded-full bg-blue-50 hover:bg-blue-100 hover:shadow-xl shadow-lg"
         >
           <Image
             src="/close.svg"
