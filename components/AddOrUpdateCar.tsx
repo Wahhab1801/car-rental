@@ -1,13 +1,13 @@
-// AddOrUpdateCar.js
+"use client";
 import React, { useEffect, useState } from "react";
 import { VehicleForm } from "./VehicleForm";
 import Modal from "./Modal";
 import { fetchCars } from "@/utils";
-import { CarProps } from "@/types";
+import { Vehicle } from "@/types";
 
 const AddOrUpdateCar = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [cars, setCars] = useState<CarProps[]>([]);
+  const [cars, setCars] = useState<Vehicle[]>([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -41,7 +41,7 @@ const AddOrUpdateCar = () => {
         </button>
         <div className="p-4">
           <Modal isOpen={isFormOpen} closeModal={closeFormModal}>
-            <VehicleForm />
+            <VehicleForm closeModal={closeFormModal} />
           </Modal>
         </div>
       </div>

@@ -1,10 +1,10 @@
 "use client";
 
-import { CarProps } from "@/types";
+import { Vehicle } from "@/types";
 import React, { useEffect, useState } from "react";
 
 const CarDetailsPage = ({ id }: { id: string }) => {
-  const [car, setCarData] = useState<(CarProps & { images: string[] }) | null>(
+  const [car, setCarData] = useState<(Vehicle & { images: string[] }) | null>(
     null
   );
 

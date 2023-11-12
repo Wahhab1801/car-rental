@@ -5,29 +5,31 @@ import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
 import CloudinaryUploadWidget from "./CloudinaryUploader";
 import { cloudinaryCloudName } from "@/constants";
+import axios from "axios"; // Import Axios for making HTTP requests
 
 interface VehicleFormProps {
   vehicle?: Vehicle; // Pass the existing vehicle data for editing, if available
+  closeModal: () => void;
 }
 
-export const VehicleForm: React.FC<VehicleFormProps> = ({ vehicle }) => {
+export const VehicleForm: React.FC<VehicleFormProps> = ({
+  vehicle,
+  closeModal,
+}) => {
   const [formData, setFormData] = useState<Vehicle>(vehicle || ({} as Vehicle));
   const [publicIds, setPublicIds] = useState([]);
   const [uploadPreset] = useState("l1hxt0ta");
   const [uwConfig] = useState({
-    cloudinaryCloudName,
+    cloudName: "dr815brzr",
     uploadPreset,
     cropping: true,
     multiple: true,
   });
   const cld = new Cloudinary({
     cloud: {
-      cloudName: cloudinaryCloudName,
+      cloudName: "dr815brzr",
     },
   });
-
-  // console.log("formData", formData);
-  // console.log("publicIds", publicIds);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -41,19 +43,37 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({ vehicle }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const newVehicle = {
+      const body: Vehicle = {
         ...formData,
-        ulezCompliant: formData?.ulezCompliant == "true",
-        sold: formData?.sold == "true",
-        unlist: formData.unlist == "true",
-      } as Vehicle;
-      // Create a new vehicle
-      // await prisma.vehicles.create({
-      //   data: formData,
-      // });
-      // Redirect to the vehicle list page or perform other actions as needed
+        ulezCompliant: formData.ulezCompliant === "true",
+        sold: formData.sold === "true",
+        unlist: formData.unlist === "true",
+        images: publicIds,
+        doors: formData?.doors ? +formData.doors : 0,
+        seats: formData?.seats ? +formData.seats : 0,
+        price: formData?.price ? +formData.price : 0,
+        owners: formData?.owners ? +formData.owners : 0,
+        year: formData?.year ? +formData.year : 0,
+        mileage: formData?.mileage ? +formData.mileage : 0,
+        dateOfRegistration: formData?.dateOfRegistration
+          ? new Date(formData.dateOfRegistration).toISOString()
+          : new Date().toISOString(),
+      };
+      console.log("body", body);
+      let response;
+      if (publicIds.length) {
+        response = await axios.post("http://localhost:3001/vehicles", body);
+        if (response.status >= 200 && response.status < 300) {
+          console.log("Vehicle added successfully:", response?.data);
+          closeModal();
+        }
+      } else {
+        alert("Please add pictures");
+        throw new Error("Please add pictures");
+      }
     } catch (error) {
-      console.error(error);
+      alert(`Vehicle creating failed: ${error}`);
+      console.error("Error adding vehicle:", error);
     }
   };
 

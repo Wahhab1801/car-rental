@@ -9,7 +9,7 @@ export type Vehicle = {
   ulezCompliant?: boolean | string;
   doors?: number;
   seats?: number;
-  dateOfRegistration?: string | null;
+  dateOfRegistration: string ;
   registration?: string;
   price?: number;
   sold?: boolean | string;

@@ -14,7 +14,7 @@ const GalleryNew = (props: Props) => {
   const [currentImage, setCurrentImage] = React.useState(0);
   const cld = new Cloudinary({
     cloud: {
-      cloudName: cloudinaryCloudName,
+      cloudName: "dr815brzr",
     },
   });
 
@@ -27,6 +27,7 @@ const GalleryNew = (props: Props) => {
             selectedItem={currentImage}
             onChange={(index: number) => setCurrentImage(index)}
             className="h-auto max-w-full rounded-lg"
+            showThumbs={false}
           >
             {images &&
               images.map((image, index) => (

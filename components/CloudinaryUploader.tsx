@@ -2,13 +2,13 @@ import { createContext, useEffect, useState } from "react";
 
 const CloudinaryScriptContext = createContext({});
 
-function CloudinaryUploadWidget({
+const CloudinaryUploadWidget = ({
   uwConfig,
   setPublicIds,
 }: {
   uwConfig: any;
   setPublicIds: any;
-}) {
+}) => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -41,7 +41,6 @@ function CloudinaryUploadWidget({
           }
         }
       );
-
       myWidget.update({
         showAdvancedOptions: true,
         multiple: true,
@@ -49,7 +48,8 @@ function CloudinaryUploadWidget({
 
       document.getElementById("upload_widget")?.addEventListener(
         "click",
-        function () {
+        function (event) {
+          event.preventDefault();
           myWidget.open();
         },
         false
@@ -61,6 +61,7 @@ function CloudinaryUploadWidget({
     <CloudinaryScriptContext.Provider value={{ loaded }}>
       <button
         id="upload_widget"
+        type="button"
         className="cloudinary-button"
         onClick={initializeCloudinaryWidget}
       >
@@ -68,7 +69,7 @@ function CloudinaryUploadWidget({
       </button>
     </CloudinaryScriptContext.Provider>
   );
-}
+};
 
 export default CloudinaryUploadWidget;
 export { CloudinaryScriptContext };

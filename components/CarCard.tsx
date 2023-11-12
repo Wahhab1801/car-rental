@@ -39,13 +39,14 @@ const CarCard = ({ car }: CarCardProps) => {
   const [currentImage, setCurrentImage] = useState(0);
   const cld = new Cloudinary({
     cloud: {
-      cloudName: cloudinaryCloudName,
+      cloudName: "dr815brzr",
     },
   });
 
   const handleClick = () => {
     router.push(`/details/${id}`);
   };
+  console.log("car", car);
 
   return (
     <div className="car-card group">
@@ -62,6 +63,7 @@ const CarCard = ({ car }: CarCardProps) => {
         showArrows={true}
         selectedItem={currentImage}
         onChange={(index) => setCurrentImage(index)}
+        showThumbs={false}
       >
         {images?.map((image, index) => (
           <div key={index}>
