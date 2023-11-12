@@ -6,6 +6,7 @@ interface ModalProps {
   isOpen: boolean;
   closeModal: () => void;
   children: ReactNode;
+  title?: string;
 }
 
 const Modal: React.FC<ModalProps> = ({

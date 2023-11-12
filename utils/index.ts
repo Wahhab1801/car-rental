@@ -1,13 +1,13 @@
+import axios from "axios";
 import { Vehicle, FilterCarProps } from "@/types";
 import { ReadonlyURLSearchParams } from "next/navigation";
 
 export const fetchCars = async (filters?: FilterCarProps) => {
-  //  const response = await fetch(`http://localhost:3001/vehicles?skip=1`)
+  //  const response = await fetch(`http://localhost:3001/vehicles`)
   const response = await fetch(
-    `https://motech-backend.vercel.app/vehicles?skip=0`
+    'https://motech-backend.vercel.app/vehicles?skip=0'
   );
 
-  console.log("response", response);
   const result = await response.json();
   return result;
 };
@@ -20,53 +20,29 @@ export const fetchCar = async (id: string) => {
   return result;
 };
 
-export const generateCarImages = (car: Vehicle, angle?: string) => {
-  const url = new URL("https://cdn.imagin.studio/getimage");
-  const { make, model, year } = car;
-
-  url.searchParams.append(
-    "customer",
-    process.env.NEXT_PUBLIC_IMAGIN_API_KEY || ""
-  );
-  url.searchParams.append("make", make as string);
-  url.searchParams.append("modelFamily", model?.split(" ")[0] as string);
-  url.searchParams.append("zoomType", "fullscreen");
-  url.searchParams.append("modelYear", `${year}`);
-  // url.searchParams.append('zoomLevel', zoomLevel);
-  // url.searchParams.append("angle", `${angle}`);
-
-  return `${url}`;
-};
-
 export const updateSearchParams = (type: string, value: string) => {
   const params = new URLSearchParams(window.location.search);
-  params.set(type, value);
-
+  if (params.has(type)) params.delete(type);
+  if (value != "") params.set(type, value);
+  console.log("params", params);
   const newPathName = `${window.location.pathname}?${params.toString()}`;
   return newPathName;
 };
 
-export const fetchCarDetails = async (id: string) => {
-  const headers = {
-    "X-RapidAPI-Key": "cf30120f9amsh82f6df583ebe966p13c03ejsne2b394f52ae7",
-    "X-RapidAPI-Host": "cars-by-api-ninjas.p.rapidapi.com",
-  };
-  const response = await fetch(
-    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars/${id}`,
-    {
-      headers: headers,
-    }
+// for main page
+export const fetchCarsAxios = (filters: FilterCarProps) => {
+  const params = new URLSearchParams();
+
+  if (filters?.manufacturer)
+    params.append("manufacturer", filters.manufacturer);
+  if (filters?.condition) params.append("make", filters.condition);
+  if (filters?.make) params.append("make", filters.make);
+  if (filters?.model) params.append("modelFamily", filters.model);
+  if (filters?.fuel) params.append("fuel", filters.fuel);
+  if (filters!["year[gte]"]) params.append("year[gte]", filters!["year[gte]"]);
+  return axios.get(
+    `https://motech-backend.vercel.app/vehicles?skip=0${
+      params ? "&" + params.toString() : ""
+    }`
   );
-  const result = await response.json();
-  return result;
-};
-
-export const createUrl = (
-  pathname: string,
-  params: URLSearchParams | ReadonlyURLSearchParams
-) => {
-  const paramsString = params.toString();
-  const queryString = `${paramsString.length ? "?" : ""}${paramsString}`;
-
-  return `${pathname}${queryString}`;
 };

@@ -13,16 +13,39 @@ module.exports = {
       },
       colors: {
         "black-100": "#2B2C35",
-        "primary-blue": {
-          DEFAULT: "#2B59FF",
-          100: "#F5F8FF",
-        },
         "secondary-orange": "#f79761",
         "light-white": {
           DEFAULT: "rgba(59,60,152,0.03)",
           100: "rgba(59,60,152,0.02)",
         },
         grey: "#747A88",
+        gray: {
+          50: "#F9FAFB",
+          100: "#f3f4f6",
+          200: "#e5e7eb",
+          300: "#d1d5db",
+          400: "#9ca3af",
+          500: "#6b7280",
+          600: "#4b5563",
+          700: "#374151",
+          800: "#1f2937",
+          900: "#111827",
+          950: "#030712",
+        },
+        primary: {
+          50: "#eff6ff", // Lighter shade of blue
+          100: "#f5f8ff", // Lightest shade of blue
+          150: "#dbeafe", // Light blue
+          200: "#bfdbfe", // ...
+          300: "#93c5fd",
+          400: "#60a5fa",
+          DEFAULT: "#2b59ff", // Main blue
+          500: "#3b82f6", // Standard blue
+          600: "#2563eb", // Medium blue
+          700: "#1d4ed8", // Dark blue
+          800: "#1e40af",
+          900: "#1e3a8a", // Darker shade of blue
+        },
       },
       backgroundImage: {
         pattern: "url('/pattern.png')",

@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Navbar, Footer } from "@/components";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Car Rental",
@@ -17,6 +18,7 @@ export default function RootLayout({
       <body className={"relative"}>
         <Navbar />
         {children}
+        <Toaster />
         <Footer />
       </body>
     </html>
