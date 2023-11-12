@@ -174,3 +174,7 @@ export const some_random_images = [
 
 export const cloudinaryCloudName =
   process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+
+export const emailJsServiceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+export const emailJsTemplateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+export const emailJsPublicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
