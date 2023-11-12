@@ -82,7 +82,7 @@
 }
 
 .home__error-container {
-  @apply mt-16 flex justify-center items-center flex-col gap-2;
+  @apply mt-16 flex justify-center min-h-[300px] items-center flex-col gap-2;
 }
 /* END: Home styles */
 
@@ -260,4 +260,19 @@
   max-width: 100%;
   height: auto;
   margin-bottom: 20px;
+}
+
+/* Custom scrollbar styles */
+.slim-scrollbar::-webkit-scrollbar {
+  width: 8px; /* width of the entire scrollbar */
+}
+
+.slim-scrollbar::-webkit-scrollbar-track {
+  background: transparent; /* color of the tracking area */
+}
+
+.slim-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #9ca3af; /* color of the scroll thumb */
+  border-radius: 4px; /* roundness of the scroll thumb */
+  border: 2px solid transparent; /* creates padding around scroll thumb */
 }

@@ -1,27 +1,14 @@
-import Image from "next/image";
-import { CarCard, CustomFilter, Hero, SearchBar, ShowMore } from "@/components";
-import { fetchCars } from "@/utils";
-import { FilterCarProps, Vehicle } from "@/types";
-import { fuels, yearsOfProduction } from "@/constants";
+import React from "react";
+import { Hero } from "@/components";
+import { FilterCarProps } from "@/types";
+import MainPage from "@/components/MainPage";
+import Filters from "@/components/Filters";
 
 export default async function Home({
   searchParams,
 }: {
   searchParams: FilterCarProps;
 }) {
-  const allCars = await fetchCars({
-    manufacturer: searchParams.manufacturer || "",
-    model: searchParams.model || "",
-    fuel: searchParams.fuel || "",
-    "year[gte]": searchParams["year[gte]"]
-      ? String(searchParams["year[gte]"])
-      : "2021",
-    limit: searchParams.limit || 10,
-  });
-  const cars: Vehicle[] & { message: string } = allCars?.data;
-  console.log("allCars", cars.length, searchParams["year[gte]"]);
-  const isDataEmpty = !Array.isArray(cars) || cars.length === 0 || !cars;
-
   return (
     <main className="overflow-hidden">
       <Hero />
@@ -33,31 +20,10 @@ export default async function Home({
 
         <div className="home__filters">
           {/* <SearchBar /> */}
-
-          <div className="home__filter-container">
-            <CustomFilter title="fuel" options={fuels} />
-            <CustomFilter title="year[gte]" options={yearsOfProduction} />
-          </div>
+          {/* filters */}
+          <Filters searchParams={searchParams} />
         </div>
-        {!isDataEmpty ? (
-          <section>
-            <div className="home__cars-wrapper">
-              {cars.map((car) => (
-                <CarCard car={car} />
-              ))}
-            </div>
-
-            <ShowMore
-              pageNumber={(searchParams.limit || 10) / 10}
-              isNext={(searchParams.limit || 10) > cars.length}
-            />
-          </section>
-        ) : (
-          <div className="home__error-container">
-            <h2 className="text-black text-xl font-bold">Oops, no results</h2>
-            {cars?.message && <p>{cars?.message}</p>}
-          </div>
-        )}
+        <MainPage searchParams={searchParams} />
       </div>
     </main>
   );

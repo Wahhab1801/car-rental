@@ -42,8 +42,58 @@ export const manufacturers = [
   "Volvo",
 ];
 
+export const conditions = [
+  { title: "Condition", value: "" },
+  { title: "New", value: "New" },
+  { title: "Used", value: "Used" },
+];
+
+export const makes = [
+  { title: "Make", value: "" },
+  { title: "Audi", value: "Audi" },
+  { title: "Bentley", value: "Bentley" },
+  { title: "BMW", value: "BMW" },
+  { title: "Cadillac", value: "Cadillac" },
+  { title: "Chevrolet", value: "Chevrolet" },
+  { title: "Ferrari", value: "Ferrari" },
+  { title: "Fiat", value: "Fiat" },
+  { title: "Ford", value: "Ford" },
+  { title: "Honda", value: "Honda" },
+  { title: "Hyundai", value: "Hyundai" },
+  { title: "Jaguar", value: "Jaguar" },
+  { title: "Kia", value: "Kia" },
+  { title: "Lexus", value: "Lexus" },
+  { title: "Tesla", value: "Tesla" },
+  { title: "Toyota", value: "Toyota" },
+  { title: "Volkswagen", value: "Volkswagen" },
+  { title: "Volvo", value: "Volvo" },
+];
+
+export const models = [
+  { title: "Model", value: "" },
+  { title: "A3", value: "A3" },
+  { title: "A4", value: "A4" },
+  { title: "A5", value: "A5" },
+  { title: "A6", value: "A6" },
+  { title: "A7", value: "A7" },
+  { title: "A8", value: "A8" },
+  { title: "A8 L", value: "A8 L" },
+  { title: "Q3", value: "Q3" },
+  { title: "Q5", value: "Q5" },
+];
+
 export const yearsOfProduction = [
   { title: "Year", value: "" },
+  { title: "2005", value: "2005" },
+  { title: "2006", value: "2006" },
+  { title: "2007", value: "2007" },
+  { title: "2008", value: "2008" },
+  { title: "2009", value: "2009" },
+  { title: "2010", value: "2010" },
+  { title: "2011", value: "2011" },
+  { title: "2012", value: "2012" },
+  { title: "2013", value: "2013" },
+  { title: "2014", value: "2014" },
   { title: "2015", value: "2015" },
   { title: "2016", value: "2016" },
   { title: "2017", value: "2017" },
@@ -57,7 +107,7 @@ export const yearsOfProduction = [
 
 export const fuels = [
   {
-    title: "Fuel",
+    title: "Fuel Type",
     value: "",
   },
   {

@@ -1,8 +1,8 @@
 "use client";
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Listbox, Transition } from "@headlessui/react";
 import { CustomFilterProps } from "@/types";
 import { updateSearchParams } from "@/utils";
@@ -10,15 +10,18 @@ import { updateSearchParams } from "@/utils";
 const CustomFilter = ({ title, options }: CustomFilterProps) => {
   const [selected, setSelected] = useState(options[0]);
   const router = useRouter();
-
+  const searchParams = useSearchParams();
   const handleFilter = (e: React.FormEvent<HTMLFormElement>) => {};
 
   const hanldeUpdateParams = (e: { title: string; value: string }) => {
-    if (!e?.value) return;
     const newPathName = updateSearchParams(title, e.value.toLowerCase());
 
     router.push(newPathName, { scroll: false });
   };
+
+  useEffect(() => {
+    if (searchParams.get(title) === null) setSelected(options[0]);
+  }, [searchParams]);
 
   return (
     <div className="w-fit">
@@ -46,13 +49,13 @@ const CustomFilter = ({ title, options }: CustomFilterProps) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="custom-filter__options">
+            <Listbox.Options className="custom-filter__options min-w-fit">
               {options.map((option) => (
                 <Listbox.Option
                   key={option.title}
                   value={option}
                   className={({ active }) =>
-                    `relative cursor-default select-none py-2 px-4 ${
+                    `relative cursor-default select-none overflow-hidden py-2 px-4 ${
                       active ? "bg-primary-blue text-white" : "text-gray-900"
                     }`
                   }
