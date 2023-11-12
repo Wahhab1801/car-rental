@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Vehicle } from "../types";
 import "tailwindcss/tailwind.css";
 import { Cloudinary } from "@cloudinary/url-gen";
@@ -17,7 +17,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
   closeModal,
 }) => {
   const [formData, setFormData] = useState<Vehicle>(vehicle || ({} as Vehicle));
-  const [publicIds, setPublicIds] = useState([]);
+  const [publicIds, setPublicIds] = useState<string[]>([]);
   const [uploadPreset] = useState("l1hxt0ta");
   const [uwConfig] = useState({
     cloudName: "dr815brzr",
@@ -30,6 +30,24 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
       cloudName: "dr815brzr",
     },
   });
+  useEffect(() => {
+    if (vehicle) {
+      const { id, ...formDataWithoutId } = vehicle;
+      const dateOfRegistrationDate = new Date(vehicle.dateOfRegistration);
+      const formattedDateOfRegistration = dateOfRegistrationDate
+        .toISOString()
+        .split("T")[0];
+      setFormData({
+        ...formDataWithoutId,
+        dateOfRegistration: formattedDateOfRegistration,
+      });
+      setPublicIds(vehicle.images as string[]);
+      console.log("publicIds", publicIds);
+    } else {
+      setFormData({} as Vehicle);
+      setPublicIds([]);
+    }
+  }, [vehicle]);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -59,17 +77,33 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           ? new Date(formData.dateOfRegistration).toISOString()
           : new Date().toISOString(),
       };
-      console.log("body", body);
-      let response;
-      if (publicIds.length) {
-        response = await axios.post("http://localhost:3001/vehicles", body);
-        if (response.status >= 200 && response.status < 300) {
-          console.log("Vehicle added successfully:", response?.data);
-          closeModal();
+      if (vehicle) {
+        let response;
+        console.log("publicIds2", publicIds);
+
+        if (publicIds.length) {
+          response = await axios.patch(
+            `http://localhost:3001/vehicles/${vehicle.id}`,
+            body
+          );
+          if (response.status >= 200 && response.status < 300) {
+            closeModal();
+            setFormData({} as Vehicle);
+          }
+        } else {
+          alert("Please add pictures");
         }
       } else {
-        alert("Please add pictures");
-        throw new Error("Please add pictures");
+        let response;
+        if (publicIds.length) {
+          response = await axios.post("http://localhost:3001/vehicles", body);
+          if (response.status >= 200 && response.status < 300) {
+            closeModal();
+            setFormData({} as Vehicle);
+          }
+        } else {
+          alert("Please add pictures");
+        }
       }
     } catch (error) {
       alert(`Vehicle creating failed: ${error}`);
@@ -94,7 +128,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
             type="text"
             id="make"
             name="make"
-            value={formData.make || ""}
+            value={formData?.make || ""}
             onChange={handleChange}
             required
             className="mt-1 block w-full border-solid border-2 border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -111,7 +145,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
             type="text"
             id="model"
             name="model"
-            value={formData.model || ""}
+            value={formData?.model || ""}
             onChange={handleChange}
             required
             className="mt-1 block w-full border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -131,7 +165,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
             type="text"
             id="title"
             name="title"
-            value={formData.title || ""}
+            value={formData?.title || ""}
             onChange={handleChange}
             className="mt-1 block w-full border-solid border-2 border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
@@ -147,7 +181,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
             type="text"
             id="colour"
             name="colour"
-            value={formData.colour || ""}
+            value={formData?.colour || ""}
             onChange={handleChange}
             className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
@@ -164,7 +198,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
         <textarea
           id="description"
           name="description"
-          value={formData.description || ""}
+          value={formData?.description || ""}
           onChange={handleChange}
           rows={3}
           className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -183,7 +217,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
             type="text"
             id="vehicleCategory"
             name="vehicleCategory"
-            value={formData.vehicleCategory || "Car"}
+            value={formData?.vehicleCategory || "Car"}
             onChange={handleChange}
             className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
@@ -198,7 +232,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           <select
             id="ulezCompliant"
             name="ulezCompliant"
-            value={formData.ulezCompliant ? "true" : "false"}
+            value={formData?.ulezCompliant ? "true" : "false"}
             onChange={handleChange}
             className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           >
@@ -220,7 +254,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
             type="number"
             id="doors"
             name="doors"
-            value={formData.doors || ""}
+            value={formData?.doors || ""}
             onChange={handleChange}
             className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
@@ -236,7 +270,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
             type="number"
             id="seats"
             name="seats"
-            value={formData.seats || ""}
+            value={formData?.seats || ""}
             onChange={handleChange}
             className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
@@ -254,7 +288,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           type="date"
           id="dateOfRegistration"
           name="dateOfRegistration"
-          value={formData.dateOfRegistration || ""}
+          value={formData?.dateOfRegistration || ""}
           onChange={handleChange}
           className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
@@ -271,7 +305,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           type="text"
           id="registration"
           name="registration"
-          value={formData.registration || ""}
+          value={formData?.registration || ""}
           onChange={handleChange}
           className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
@@ -288,7 +322,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           type="number"
           id="price"
           name="price"
-          value={formData.price || ""}
+          value={formData?.price || ""}
           onChange={handleChange}
           className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
@@ -305,7 +339,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           <select
             id="sold"
             name="sold"
-            value={formData.sold ? "true" : "false"}
+            value={formData?.sold ? "true" : "false"}
             onChange={handleChange}
             className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           >
@@ -323,7 +357,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           <select
             id="unlist"
             name="unlist"
-            value={formData.unlist ? "true" : "false"}
+            value={formData?.unlist ? "true" : "false"}
             onChange={handleChange}
             className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           >
@@ -344,7 +378,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           type="text"
           id="bodyType"
           name="bodyType"
-          value={formData.bodyType || ""}
+          value={formData?.bodyType || ""}
           onChange={handleChange}
           className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
@@ -361,7 +395,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           type="text"
           id="fuel"
           name="fuel"
-          value={formData.fuel || ""}
+          value={formData?.fuel || ""}
           onChange={handleChange}
           className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
@@ -378,7 +412,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           type="text"
           id="transmission"
           name="transmission"
-          value={formData.transmission || ""}
+          value={formData?.transmission || ""}
           onChange={handleChange}
           className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
@@ -395,7 +429,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           type="number"
           id="owners"
           name="owners"
-          value={formData.owners || ""}
+          value={formData?.owners || ""}
           onChange={handleChange}
           className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus-border-indigo-500 sm:text-sm"
         />
@@ -412,7 +446,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           type="number"
           id="year"
           name="year"
-          value={formData.year || ""}
+          value={formData?.year || ""}
           onChange={handleChange}
           className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
@@ -429,7 +463,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           type="number"
           id="mileage"
           name="mileage"
-          value={formData.mileage || ""}
+          value={formData?.mileage || ""}
           onChange={handleChange}
           className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
@@ -446,7 +480,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           type="text"
           id="emissionClass"
           name="emissionClass"
-          value={formData.emissionClass || ""}
+          value={formData?.emissionClass || ""}
           onChange={handleChange}
           className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
@@ -463,7 +497,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           setPublicIds={setPublicIds}
         />
         <div style={{ display: "flex", flexWrap: "wrap" }}>
-          {publicIds.map((publicId) => (
+          {publicIds?.map((publicId) => (
             <div key={publicId} style={{ margin: "8px", maxWidth: "200px" }}>
               <AdvancedImage
                 cldImg={cld.image(publicId)}
