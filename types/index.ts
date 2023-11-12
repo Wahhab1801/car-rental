@@ -25,7 +25,7 @@ export interface CarDetailsProps {
 
 export interface FilterCarProps {
   manufacturer: string;
-  year: string;
+  "year[gte]": string;
   fuel: string;
   limit: number;
   model: string;

@@ -13,11 +13,13 @@ export default async function Home({
     manufacturer: searchParams.manufacturer || "",
     model: searchParams.model || "",
     fuel: searchParams.fuel || "",
-    year: searchParams.year || "2021",
+    "year[gte]": searchParams["year[gte]"]
+      ? String(searchParams["year[gte]"])
+      : "2021",
     limit: searchParams.limit || 10,
   });
   const cars: Vehicle[] & { message: string } = allCars?.data;
-  console.log("allCars", cars);
+  console.log("allCars", cars.length, searchParams["year[gte]"]);
   const isDataEmpty = !Array.isArray(cars) || cars.length === 0 || !cars;
 
   return (
@@ -30,11 +32,11 @@ export default async function Home({
         </div>
 
         <div className="home__filters">
-          <SearchBar />
+          {/* <SearchBar /> */}
 
           <div className="home__filter-container">
             <CustomFilter title="fuel" options={fuels} />
-            <CustomFilter title="year" options={yearsOfProduction} />
+            <CustomFilter title="year[gte]" options={yearsOfProduction} />
           </div>
         </div>
         {!isDataEmpty ? (
