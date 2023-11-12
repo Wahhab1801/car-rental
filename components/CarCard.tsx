@@ -114,16 +114,16 @@ const CarCard = ({ car }: CarCardProps) => {
             <p>{fuel}</p>
           </div>
         </div>
-        <div className="car-card__btn-container">
-          <CustomButton
-            title="View More"
-            containerStyles="w-full py-[16px] rounded-full bg-primary-blue shadow-xl opacity-100"
-            textStyles="text-white text-[14px] leading-[14px] font-bold"
-            rightIcon="/right-arrow.svg"
-            // handleClick={() => setIsOpen(true)}
-            handleClick={handleClick}
-          />
-        </div>
+      </div>
+      <div className="car-card__btn-container">
+        <CustomButton
+          title="View More"
+          containerStyles="w-full py-[16px] rounded-full bg-primary-blue shadow-xl opacity-100"
+          textStyles="text-white text-[14px] leading-[14px] font-bold"
+          rightIcon="/right-arrow.svg"
+          // handleClick={() => setIsOpen(true)}
+          handleClick={handleClick}
+        />
       </div>
       <CarDetails
         isOpen={isOpen}

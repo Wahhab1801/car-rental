@@ -16,7 +16,7 @@ export default async function Home({
     year: searchParams.year || "2021",
     limit: searchParams.limit || 10,
   });
-  const cars: Vehicle[] | { message: string } = allCars?.data;
+  const cars: Vehicle[] & { message: string } = allCars?.data;
   console.log("allCars", cars);
   const isDataEmpty = !Array.isArray(cars) || cars.length === 0 || !cars;
 
@@ -53,7 +53,7 @@ export default async function Home({
         ) : (
           <div className="home__error-container">
             <h2 className="text-black text-xl font-bold">Oops, no results</h2>
-            <p>{cars?.message}</p>
+            {cars?.message && <p>{cars?.message}</p>}
           </div>
         )}
       </div>

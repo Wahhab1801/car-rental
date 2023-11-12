@@ -19,11 +19,11 @@ const Navbar = () => {
           <h1 className="text-[30px]">Motech Motors</h1>
         </Link>
 
-        <CustomButton
+        {/* <CustomButton
           title="Sign In"
           containerStyles="bg-primary-blue rounded-full bg-white min-w-[130px]"
           btnType="button"
-        />
+        /> */}
       </nav>
     </header>
   );
