@@ -10,12 +10,8 @@ const CarDetailsPage = ({ id }: { id: string }) => {
 
   useEffect(() => {
     const fetchCarData = async () => {
-      console.log(id);
       if (id) {
-        console.log(JSON.parse(localStorage.getItem(id) || "{}"));
-
         const data = JSON.parse(localStorage.getItem(id) || "{}");
-        console.log(data);
         setCarData(data);
       }
     };
@@ -24,7 +20,6 @@ const CarDetailsPage = ({ id }: { id: string }) => {
   }, [id]);
 
   if (!car) return <div>loading...</div>;
-  console.log(car);
 
   return (
     <div className={"car-details-container"}>
@@ -61,9 +56,6 @@ const CarDetailsPage = ({ id }: { id: string }) => {
             )}
           </div>
         </div>
-        {/* <h1 className={"car-details__title"}>{name}</h1>
-        <p className={"car-details__description"}>{description}</p> */}
-        {/* Add more car details here */}
       </div>
     </div>
   );

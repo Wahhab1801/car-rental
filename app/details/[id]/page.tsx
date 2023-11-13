@@ -5,7 +5,6 @@ import { useParams } from "next/navigation";
 
 const Page: React.FC = () => {
   const params = useParams();
-  console.log("params: ", params);
   return (
     <main className="overflow-hidden pt-20">
       <DetailsPage {...params} />

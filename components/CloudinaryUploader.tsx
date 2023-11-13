@@ -33,7 +33,6 @@ const CloudinaryUploadWidget = ({
         uwConfig,
         (error: any, result: any) => {
           if (!error && result && result.event === "success") {
-            console.log("Done! Here is the image info: ", result.info);
             setPublicIds((prevPublicIds: string[]) => [
               ...prevPublicIds,
               result.info.public_id,

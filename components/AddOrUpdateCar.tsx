@@ -3,26 +3,63 @@
 import React, { useEffect, useState } from "react";
 import { VehicleForm } from "./VehicleForm";
 import Modal from "./Modal";
-import { fetchCars } from "@/utils";
 import { Vehicle } from "@/types";
+import Pagination from "./Pagination";
+import CustomSelect from "./CustomSelect";
+import { baseUrl } from "@/constants";
 
 const AddOrUpdateCar = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [cars, setCars] = useState<Vehicle[]>([]);
   const [selectedCar, setSelectedCar] = useState<Vehicle | undefined>();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [totalCount, setTotalCount] = useState<number>(5);
+  const [selectedSold, setSelectedSold] = useState<string | undefined>();
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const totalPages = Math.ceil(totalCount / pageSize);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handleSoldSelect = (filter: string | undefined) => {
+    setSelectedSold(filter);
+  };
+
+  const handlePageSizeSelect = (filter: string | undefined) => {
+    if (filter) setPageSize(+filter);
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetchCars();
-        setCars(response.data);
+        const response = await fetch(
+          `${baseUrl}/vehicles?skip=${
+            (currentPage - 1) * pageSize
+          }&take=${pageSize}${
+            selectedSold !== undefined
+              ? `&sold=${selectedSold === "sold" ? true : false}`
+              : ""
+          }${
+            searchTerm ? `&registration=${encodeURIComponent(searchTerm)}` : ""
+          }`
+        );
+        const result = await response.json();
+        setCars(result.data);
+        setTotalCount(result.total);
       } catch (error) {
         console.error("Error fetching cars:", error);
       }
     }
 
     fetchData();
-  }, []);
+  }, [currentPage, pageSize, selectedSold, searchTerm]);
 
   const openFormModal = (car?: Vehicle) => {
     setSelectedCar(car);
@@ -37,12 +74,34 @@ const AddOrUpdateCar = () => {
     <main className="overflow-hidden">
       <div className="mt-20 padding-x padding-y max-width">
         <div className="p-4">
-          <button
-            onClick={() => openFormModal()}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4 self-end"
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
           >
-            Add Vehicle
-          </button>
+            <button
+              onClick={() => openFormModal()}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4 self-end"
+            >
+              Add Vehicle
+            </button>
+            <input
+              type="text"
+              placeholder="Search by Registration"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              className="border p-2 rounded-full w-80 border-gray-800"
+            />
+            <div className="home__filter-container">
+              <CustomSelect
+                title="Sold"
+                options={["sold", "not-sold"]}
+                onChange={handleSoldSelect}
+              />
+            </div>
+          </div>
           <div className="p-4">
             <Modal
               header={selectedCar ? "Update Vehicle" : "Add Vehicle"}
@@ -66,25 +125,47 @@ const AddOrUpdateCar = () => {
               </tr>
             </thead>
             <tbody>
-              {cars.map((car) => (
-                <tr key={car.id}>
-                  <td>{car.id}</td>
-                  <td>{car.make}</td>
-                  <td>{car.model}</td>
-                  <td>{car.registration}</td>
-                  <td>{car.sold ? "Yes" : "No"}</td>
-                  <td>
-                    <button
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                      onClick={() => openFormModal(car)}
-                    >
-                      Update
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {cars &&
+                cars.map((car) => (
+                  <tr key={car.id}>
+                    <td>{car.id}</td>
+                    <td>{car.make}</td>
+                    <td>{car.model}</td>
+                    <td>{car.registration}</td>
+                    <td>{car.sold ? "Yes" : "No"}</td>
+                    <td>
+                      <button
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={() => openFormModal(car)}
+                      >
+                        Update
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
+          <div
+            className="mt-4"
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+            <div className="home__filter-container">
+              <CustomSelect
+                title="Table Size"
+                options={["5", "10", "15", "20"]}
+                onChange={handlePageSizeSelect}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </main>
