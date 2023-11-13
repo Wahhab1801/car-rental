@@ -9,6 +9,8 @@ import CarCard from "./CarCard";
 import CarDetails from "./CarDetails";
 import ShowMore from "./ShowMore";
 import Modal from "./Modal";
+import Pagination from "./Pagination";
+import CustomSelect from './CustomSelect'
 
 export {
   Hero,
@@ -21,5 +23,7 @@ export {
   CarDetails,
   SearchManufacturer,
   ShowMore,
-  Modal
+  Modal,
+  Pagination,
+  CustomSelect
 };

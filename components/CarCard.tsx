@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Vehicle } from "@/types";
-import { CarDetails, CustomButton } from ".";
+import { CustomButton } from ".";
 import { useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -30,23 +30,20 @@ const CarCard = ({ car }: CarCardProps) => {
     price,
     title,
     ulezCompliant,
-    condition,
   } = car;
 
   const router = useRouter();
 
-  const [isOpen, setIsOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
   const cld = new Cloudinary({
     cloud: {
-      cloudName: "dr815brzr",
+      cloudName: cloudinaryCloudName,
     },
   });
 
   const handleClick = () => {
     router.push(`/details/${id}`);
   };
-  console.log("car", car);
 
   return (
     <div className="car-card group">
@@ -123,15 +120,9 @@ const CarCard = ({ car }: CarCardProps) => {
           containerStyles="w-full py-[16px] rounded-full bg-primary shadow-xl opacity-100"
           textStyles="text-white text-[14px] leading-[14px] font-bold"
           rightIcon="/right-arrow.svg"
-          // handleClick={() => setIsOpen(true)}
           handleClick={handleClick}
         />
       </div>
-      {/* <CarDetails
-        isOpen={isOpen}
-        closeModal={() => setIsOpen(false)}
-        car={car}
-      /> */}
     </div>
   );
 };

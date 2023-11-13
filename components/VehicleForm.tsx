@@ -4,7 +4,11 @@ import "tailwindcss/tailwind.css";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
 import CloudinaryUploadWidget from "./CloudinaryUploader";
-import { cloudinaryCloudName } from "@/constants";
+import {
+  cloudinaryCloudName,
+  cloudinaryUploadPreset,
+  baseUrl,
+} from "@/constants";
 import axios from "axios"; // Import Axios for making HTTP requests
 
 interface VehicleFormProps {
@@ -18,16 +22,15 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
 }) => {
   const [formData, setFormData] = useState<Vehicle>(vehicle || ({} as Vehicle));
   const [publicIds, setPublicIds] = useState<string[]>([]);
-  const [uploadPreset] = useState("l1hxt0ta");
   const [uwConfig] = useState({
-    cloudName: "dr815brzr",
-    uploadPreset,
+    cloudName: cloudinaryCloudName,
+    uploadPreset: cloudinaryUploadPreset,
     cropping: true,
     multiple: true,
   });
   const cld = new Cloudinary({
     cloud: {
-      cloudName: "dr815brzr",
+      cloudName: cloudinaryCloudName,
     },
   });
   useEffect(() => {
@@ -83,7 +86,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
 
         if (publicIds.length) {
           response = await axios.patch(
-            `http://localhost:3001/vehicles/${vehicle.id}`,
+            `${baseUrl}/vehicles/${vehicle.id}`,
             body
           );
           if (response.status >= 200 && response.status < 300) {
@@ -96,7 +99,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
       } else {
         let response;
         if (publicIds.length) {
-          response = await axios.post("http://localhost:3001/vehicles", body);
+          response = await axios.post(`${baseUrl}/vehicles`, body);
           if (response.status >= 200 && response.status < 300) {
             closeModal();
             setFormData({} as Vehicle);

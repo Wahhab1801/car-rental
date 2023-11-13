@@ -1,10 +1,8 @@
 "use client";
 
 import { FilterCarProps, Vehicle } from "@/types";
-// import React, { useState, useEffect } from "react";
 import { CarCard, ShowMore } from ".";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { fetchCarsAxios } from "@/utils";
 
 type Props = {
@@ -18,16 +16,12 @@ const MainPage = (props: Props) => {
     message: string;
     total: number;
   }>();
-  const [allCars, setAllCars] = useState<Vehicle[]>([]);
   const cars: Vehicle[] = data?.data || [];
   const isDataEmpty = !Array.isArray(cars) || cars.length === 0 || !cars;
   useEffect(() => {
     fetchCarsAxios(searchParams)
       .then((response) => {
-        console.log(response.data);
         setData(response.data);
-        // const data = response.data;
-        // setAllCars(data.data);
       })
       .catch((error) => {
         console.error("Fetching error:", error);
