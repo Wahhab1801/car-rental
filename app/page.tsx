@@ -1,8 +1,8 @@
 import React from "react";
-import { Hero } from "@/components";
 import { FilterCarProps } from "@/types";
 import MainPage from "@/components/MainPage";
 import Filters from "@/components/Filters";
+import HeroSecondary from "@/components/HeroSecondary";
 
 export default async function Home({
   searchParams,
@@ -11,7 +11,7 @@ export default async function Home({
 }) {
   return (
     <main className="overflow-hidden">
-      <Hero />
+      <HeroSecondary />
       <div className="mt-12 padding-x padding-y max-width" id="discover">
         <div className="home__text-container">
           <h1 className="text-4xl font-extrabold">Cars Catalogue</h1>

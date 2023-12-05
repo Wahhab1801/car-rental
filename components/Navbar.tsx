@@ -2,12 +2,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { CustomButton } from ".";
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const pathname = usePathname();
-  console.log("pathname: ", pathname);
   return (
     <header className="w-full absolute z-10">
       <nav className="max-w-[1440px] mx-auto flex justify-between items-center sm:px-16 px-6 py-4">
@@ -21,12 +19,7 @@ const Navbar = () => {
           />
           <h1 className="text-[30px]">Motech Motors</h1>
         </Link>
-        {/* <CustomButton
-          title="Sign In"
-          containerStyles="bg-primary-blue rounded-full bg-white min-w-[130px]"
-          btnType="button"
-        /> */}
-        <div className="flex justify-end items-center w-[30%] gap-4">
+        <div className="flex justify-end items-center w-[50%] gap-4">
           <Link
             href="/"
             style={{
@@ -38,6 +31,31 @@ const Navbar = () => {
             className="mx-4 hover:underline underline-offset-4"
           >
             Home
+          </Link>
+          <Link
+            target="_"
+            href="https://www.motechautocentre.co.uk/"
+            style={{
+              color: pathname.endsWith("/mot-services") ? "black" : "white",
+              ...(pathname.endsWith("/mot-services") && {
+                textDecoration: "underline",
+              }),
+            }}
+            className="mx-4 hover:underline underline-offset-4"
+          >
+            MOT & Servicing
+          </Link>
+          <Link
+            href="/warranty"
+            style={{
+              color: pathname.endsWith("/warranty") ? "black" : "white",
+              ...(pathname.endsWith("/warranty") && {
+                textDecoration: "underline",
+              }),
+            }}
+            className="mx-4 hover:underline underline-offset-4"
+          >
+            Warranty
           </Link>
           <Link
             href="/about-us"
@@ -64,11 +82,11 @@ const Navbar = () => {
             Contact Us
           </Link>
         </div>
-        {pathname?.includes("/details/") &&
-        <div className="w-[40%] absolute h-[85px] right-0 overflow-hidden -z-10">
-          <div className="absolute -bottom-2 xl:-right-[50px] rotate-[4deg] -right-1/4 bg-hero-bg bg-repeat-round -z-10 w-full xl:h-[100vh] h-[100vh] overflow-hidden" />
-         </div>
-}
+        {pathname?.includes("/details/") && (
+          <div className="w-[40%] absolute h-[85px] right-0 overflow-hidden -z-10">
+            <div className="absolute -bottom-2 xl:-right-[50px] rotate-[4deg] -right-1/4 bg-hero-bg bg-repeat-round -z-10 w-full xl:h-[100vh] h-[100vh] overflow-hidden" />
+          </div>
+        )}
       </nav>
     </header>
   );

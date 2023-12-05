@@ -17,10 +17,10 @@ const HeroSecondary = () => {
     <div className="hero">
       <div className="flex-1 pt-36 padding-x">
         <h1 className="2xl:text-[48px] sm:text-[48px] text-[36px] font-extrabold;">
-          Find your dream ride - easily!
+          Find your dream car - easily!
         </h1>
         <p className="hero__subtitle">
-          We have the best cars in the world, ready for you to rent.
+          We have the best cars in the world, ready for you.
         </p>
         <Link href={pathname === "/" ? "#cars" : "/"}>
           <CustomButton

@@ -16,9 +16,9 @@ const Hero = () => {
   return (
     <div className="hero">
       <div className="flex-1 pt-36 padding-x">
-        <h1 className="hero__title">Find your dream ride - easily!</h1>
+        <h1 className="hero__title">Find your dream car - easily!</h1>
         <p className="hero__subtitle">
-          We have the best cars in the world, ready for you to rent.
+          We have the best cars in the world, ready for you
         </p>
         <Link href={pathname === "/" ? "#cars" : "/"}>
           <CustomButton
