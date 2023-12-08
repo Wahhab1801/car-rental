@@ -35,16 +35,16 @@ module.exports = {
         primary: {
           50: "#eff6ff", // Lighter shade of blue
           100: "#f5f8ff", // Lightest shade of blue
-          150: "#dbeafe", // Light blue
-          200: "#bfdbfe", // ...
-          300: "#93c5fd",
-          400: "#60a5fa",
-          DEFAULT: "#2b59ff", // Main blue
-          500: "#3b82f6", // Standard blue
-          600: "#2563eb", // Medium blue
-          700: "#1d4ed8", // Dark blue
-          800: "#1e40af",
-          900: "#1e3a8a", // Darker shade of blue
+          150: "#d1d5db", // Light blue
+          200: "#9ca3af", // ...
+          300: "#9ca3af",
+          400: "#f5b300",
+          DEFAULT: "#DAA520", // Main golden
+          500: "#d29000", // Standard golden
+          600: "#b77e00", // Medium golden
+          700: "#9c6b00", // Dark golden
+          800: "#815800",
+          900: "#684700", // Darker shade of golden
         },
       },
       backgroundImage: {
