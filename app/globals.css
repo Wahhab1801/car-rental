@@ -59,7 +59,9 @@
 }
 
 .hero__image-overlay {
-  @apply absolute xl:-top-24 xl:-right-[45%] -right-1/4 bg-hero-bg bg-repeat-round -z-10 w-full xl:h-screen h-[590px] overflow-hidden;
+  @apply absolute xl:-right-1/2 -right-1/4 w-full xl:h-[80vh] h-[80vh] overflow-hidden -z-10 bg-gradient-to-br from-black to-transparent transform rotate-[-3deg] rounded-[133px]
+  /* @apply bg-gradient-to-br from-black to-transparent transform rotate-[-3deg] rounded-[133px]; */
+  /* @apply absolute xl:-top-24 xl:-right-[45%] -right-1/4 bg-hero-bg2 bg-repeat-round -z-10 w-full xl:h-screen h-[590px] overflow-hidden; */;
 }
 /* END: Hero styles */
 
