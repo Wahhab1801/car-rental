@@ -7,7 +7,7 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CustomFilterProps } from "@/types";
 import { updateSearchParams } from "@/utils";
 
-const CustomFilter = ({ title, options }: CustomFilterProps) => {
+const CustomFilter = ({ title, options, zIndex }: CustomFilterProps) => {
   const [selected, setSelected] = useState(options[0]);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -32,7 +32,10 @@ const CustomFilter = ({ title, options }: CustomFilterProps) => {
           hanldeUpdateParams(e);
         }}
       >
-        <div className="relative w-fit z-10">
+        <div
+          className={`relative w-fit z-10`}
+          style={{ zIndex: (zIndex as string) ?? 10 }}
+        >
           <Listbox.Button className="custom-filter__btn">
             <span className="block truncate">{selected.title}</span>
             <Image

@@ -34,8 +34,7 @@ const HeroSecondary = () => {
         <div className="relative xl:w-[90%] w-[90%] top-8 xl:h-full h-[400px] z-0">
           <Image src="/hero.png" alt="hero" fill className="object-contain" />
         </div>
-        {/* <div className=" absolute xl:-right-1/2 -right-1/4 bg-hero-bg2 bg-repeat-round -z-10 w-full xl:h-[80vh] h-[80vh] overflow-hidden" /> */}
-        <div className="absolute xl:-right-1/2 -right-1/4 w-full xl:h-[80vh] h-[80vh] overflow-hidden -z-10 bg-gradient-to-br from-black to-transparent transform rotate-[-3deg] rounded-[133px]" />
+        <div className="absolute xl:-right-1/2 -right-[3%] w-full xl:h-[80vh] h-[60vh] overflow-hidden -z-10 bg-gradient-to-br from-black to-transparent transform rotate-[-3deg] md:rounded-[133px] rounded-[25%]" />
       </div>
     </div>
   );

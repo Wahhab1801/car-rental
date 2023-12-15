@@ -22,9 +22,13 @@ const Filters = (props: Props) => {
 
   return (
     <div className="home__filter-container">
-      <CustomFilter title="make" options={makes} />
-      <CustomFilter title="fuel" options={fuels} />
-      <CustomFilter title="year[gte]" options={yearsOfProduction} />
+      <CustomFilter title="make" options={makes} zIndex={"13"} />
+      <CustomFilter title="fuel" options={fuels} zIndex={"12"} />
+      <CustomFilter
+        title="year[gte]"
+        options={yearsOfProduction}
+        zIndex={"11"}
+      />
       <CustomFilter title="condition" options={conditions} />
       {Object.keys(searchParams).length > 0 && (
         <button

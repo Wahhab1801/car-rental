@@ -19,13 +19,15 @@ const Navbar = () => {
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link href="/" className="flex justify-center items-center h-[50px]">
             <Image
-              src="/car.png"
+              src="/car.svg"
               alt="Motech MotorsLogo"
-              width={118}
-              height={50}
-              className="object-contain mt-[5px]"
+              width={80}
+              height={30}
+              className="object-contain mt-[0px] md:h-[30px] md:w-[100px] lg:h-[50px] lg:w-[100px]"
             />
-            <h1 className="text-[30px]">Motech Motors</h1>
+            <h1 className="lg:text-[30px] text-[24px] font-bold">
+              Motech Motors
+            </h1>
           </Link>
           <button
             type="button"
@@ -64,7 +66,7 @@ const Navbar = () => {
                   textDecoration: "underline",
                 }),
               }}
-              className="mx-4 hover:underline underline-offset-4"
+              className="mx-2 lg:mx-4 hover:underline underline-offset-4"
             >
               Home
             </Link>
@@ -77,7 +79,7 @@ const Navbar = () => {
                   textDecoration: "underline",
                 }),
               }}
-              className="mx-4 hover:underline underline-offset-4"
+              className="mx-2 lg:mx-4  hover:underline underline-offset-4"
             >
               MOT & Servicing
             </Link>
@@ -89,7 +91,7 @@ const Navbar = () => {
                   textDecoration: "underline",
                 }),
               }}
-              className="mx-4 hover:underline underline-offset-4"
+              className="mx-2 lg:mx-4 hover:underline underline-offset-4"
             >
               Warranty
             </Link>
@@ -101,7 +103,7 @@ const Navbar = () => {
                   textDecoration: "underline",
                 }),
               }}
-              className="mx-4 hover:underline underline-offset-4"
+              className="mx-2 lg:mx-4 hover:underline underline-offset-4"
             >
               About Us
             </Link>
@@ -113,16 +115,16 @@ const Navbar = () => {
                   textDecoration: "underline",
                 }),
               }}
-              className="mx-4 hover:underline underline-offset-4"
+              className="mx-2 lg:mx-4 hover:underline underline-offset-4"
             >
               Contact Us
             </Link>
           </div>
-          {pathname?.includes("/details/") && (
+          {/* {pathname?.includes("/details/") && (
             <div className="w-[40%] absolute h-[85px] right-0 overflow-hidden -z-10">
               <div className="absolute -bottom-2 xl:-right-[50px] rotate-[4deg] -right-1/4 bg-hero-bg bg-repeat-round -z-10 w-full xl:h-[100vh] h-[100vh] overflow-hidden" />
             </div>
-          )}
+          )} */}
         </div>
       </nav>
     </header>
