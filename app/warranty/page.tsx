@@ -16,7 +16,7 @@ export default async function Page({
       <section className="mt-20 padding-x padding-y max-width">
         <div className="mx-auto max-w-screen-lg  py-8 sm:py-12 lg:px-4">
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-black text-center">
-            Warrenty
+            Warranty
           </h2>
           <p className="font-light text-gray-800 sm:text-xl">
             When buying a used car, warranty is highly suggested as it can give
@@ -25,7 +25,7 @@ export default async function Page({
             through us we can go through a range of comprehensive covers that
             suit your needs. We can provide warranty for any vehicle we stock.
           </p>
-          <b/>
+          <b />
           <p className="font-light text-gray-800 sm:text-xl">
             All of our cars are 82 point checked to RAC Approved vehicle
             preparation standard. Our cars come with minimum 3 months RAC

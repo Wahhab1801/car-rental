@@ -24,10 +24,14 @@ const HeroSecondary = () => {
           Motech Motors
         </h1>
         <ul className="ml-5 hero__subtitle list-disc">
-          <li className="ml-6">Minimum 3 months RAC warranty<b>*</b></li>
+          <li className="ml-6">
+            Minimum 3 months RAC warranty<b>*</b>
+          </li>
           <li className="ml-6">12 months free breakdown cover</li>
           <li className="ml-6">Vehicle History Check</li>
-          <li className="ml-6">Drive away same day<b>*</b></li>
+          <li className="ml-6">
+            Drive away same day<b>*</b>
+          </li>
         </ul>
 
         <Link href={pathname === "/" ? "#cars" : "/"}>
@@ -39,19 +43,17 @@ const HeroSecondary = () => {
         </Link>
       </div>
 
-      {!isMobile && (
-        <div className="xl:flex-[1] flex justify-end items-end w-full xl:h-[60vh] mr-10">
-          <div className="relative xl:w-[90%] w-[90%] top-8 xl:h-full h-[400px] z-0">
-            <Image
-              src="/bg-car.jpeg"
-              alt="hero"
-              fill
-              className="object-contain"
-            />
-          </div>
-          {/* <div className="absolute xl:-right-1/2 -right-[3%] w-full xl:h-[80vh] h-[60vh] overflow-hidden -z-10 bg-gradient-to-br from-black to-transparent transform rotate-[-3deg] md:rounded-[133px] rounded-[25%]" /> */}
+      <div className="xl:flex-[1] flex justify-end items-end w-full xl:h-[60vh] mr-10">
+        <div className="relative xl:w-[90%] w-[90%] top-8 xl:h-full h-[400px] z-0">
+          <Image
+            src="/bg-car.jpeg"
+            alt="hero"
+            fill
+            className="object-contain"
+          />
         </div>
-      )}
+        {/* <div className="absolute xl:-right-1/2 -right-[3%] w-full xl:h-[80vh] h-[60vh] overflow-hidden -z-10 bg-gradient-to-br from-black to-transparent transform rotate-[-3deg] md:rounded-[133px] rounded-[25%]" /> */}
+      </div>
     </div>
   );
 };
