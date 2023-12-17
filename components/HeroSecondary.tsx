@@ -15,7 +15,7 @@ const HeroSecondary = () => {
   const pathname = usePathname();
   return (
     <div className="hero mt-6">
-      <div className="flex-1 pt-36 padding-x">
+      <div className="flex-1 pt-20 padding-x">
         <h1 className="2xl:text-[48px] sm:text-[48px] text-[36px] font-extrabold;">
           Find your dream car - easily!
         </h1>
@@ -30,12 +30,12 @@ const HeroSecondary = () => {
           />
         </Link>
       </div>
-      <div className="xl:flex-[1] flex justify-end items-end w-full xl:h-[60vh]">
+      {/* <div className="xl:flex-[1] flex justify-end items-end w-full xl:h-[60vh]">
         <div className="relative xl:w-[90%] w-[90%] top-8 xl:h-full h-[400px] z-0">
           <Image src="/hero.png" alt="hero" fill className="object-contain" />
         </div>
         <div className="absolute xl:-right-1/2 -right-[3%] w-full xl:h-[80vh] h-[60vh] overflow-hidden -z-10 bg-gradient-to-br from-black to-transparent transform rotate-[-3deg] md:rounded-[133px] rounded-[25%]" />
-      </div>
+      </div> */}
     </div>
   );
 };

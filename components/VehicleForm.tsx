@@ -33,6 +33,8 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
       cloudName: cloudinaryCloudName,
     },
   });
+  const authToken = localStorage.getItem("authToken");
+
   useEffect(() => {
     if (vehicle) {
       const { id, ...formDataWithoutId } = vehicle;
@@ -87,7 +89,13 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
         if (publicIds.length) {
           response = await axios.patch(
             `${baseUrl}/vehicles/${vehicle.id}`,
-            body
+            body,
+            {
+              headers: {
+                "Content-Type": "application/json",
+                authorization: authToken,
+              },
+            }
           );
           if (response.status >= 200 && response.status < 300) {
             closeModal();
@@ -99,7 +107,12 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
       } else {
         let response;
         if (publicIds.length) {
-          response = await axios.post(`${baseUrl}/vehicles`, body);
+          response = await axios.post(`${baseUrl}/vehicles`, body, {
+            headers: {
+              "Content-Type": "application/json",
+              authorization: authToken,
+            },
+          });
           if (response.status >= 200 && response.status < 300) {
             closeModal();
             setFormData({} as Vehicle);
