@@ -5,16 +5,16 @@ type Props = {};
 
 const ContactUsWrapper = (props: Props) => {
   return (
-    <section className="bg-white">
+    <section className="bg-white mt-20">
       <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
         <div className="px-4 mx-auto max-w-screen-sm text-center lg:px-6 mb-8 lg:mb-16">
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-black">
             Contact Us
           </h2>
-          <p className="font-light text-gray-800 sm:text-xl">
+          {/* <p className="font-light text-gray-800 sm:text-xl">
             We use an agile approach to test assumptions and connect with the
             needs of your audience early and often.
-          </p>
+          </p> */}
         </div>
         <div className="grid grid-cols-1 lg:gap-8 lg:grid-cols-3">
           <div className="col-span-2 mb-8 lg:mb-0">
@@ -39,7 +39,7 @@ const ContactUsWrapper = (props: Props) => {
                 help.
               </p>
               <p className="font-semibold text-primary-600 dark:text-primary-500">
-                0 (208) 7699949
+                0 (203) 4889498
               </p>
             </div>
             <div>
@@ -64,10 +64,10 @@ const ContactUsWrapper = (props: Props) => {
                 to help.
               </p>
               <a
-                href="mailto:Motech@outlook.com"
+                href="mailto:motechmotors@outlook.com"
                 className="font-semibold text-primary-600"
               >
-                Motech@outlook.com
+                motechmotors@outlook.com
               </a>
             </div>
             <div>
@@ -86,12 +86,16 @@ const ContactUsWrapper = (props: Props) => {
                 </svg>
               </div>
               <p className="mb-2 text-xl font-bold text-gray-900 ">
-                Office Hours:
+                Dealership Hours:
               </p>
               <p className="mb-3 text-gray-500">
-                Mon - Fri: 8:30am - 5pm
-                <br /> Saturday: 8.30am - 1pm
-                <br /> Sunday: CLOSED
+                Mon - Fri: 8am - 5pm
+                <br />
+                Saturday: 8am - 1pm
+                <br />
+                Sunday: CLOSED
+                <br />
+                <span className="text-primary-700"> (Viewings strictly by appointment only)</span>
               </p>
             </div>
           </div>

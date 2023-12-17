@@ -12,11 +12,11 @@ export default async function Page({
 }) {
   return (
     <main className="overflow-hidden">
-      <HeroSecondary />
-      <section className="mt-12 padding-x padding-y max-width">
-        <div className="px-6 mx-auto max-w-screen-lg">
+      {/* <HeroSecondary /> */}
+      <section className="mt-20 padding-x padding-y max-width">
+        <div className="mx-auto max-w-screen-lg  py-8 sm:py-12 lg:px-4">
           <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-black text-center">
-            Best rates
+            Warrenty
           </h2>
           <p className="font-light text-gray-800 sm:text-xl">
             When buying a used car, warranty is highly suggested as it can give
@@ -24,6 +24,13 @@ export default async function Page({
             the cost of repairs and maintenance. When purchasing a vehicle
             through us we can go through a range of comprehensive covers that
             suit your needs. We can provide warranty for any vehicle we stock.
+          </p>
+          <b/>
+          <p className="font-light text-gray-800 sm:text-xl">
+            All of our cars are 82 point checked to RAC Approved vehicle
+            preparation standard. Our cars come with minimum 3 months RAC
+            warranty* & 12 months free breakdown cover. Our cars have all had
+            history checks completed and are HPI Clear.
           </p>
         </div>
 

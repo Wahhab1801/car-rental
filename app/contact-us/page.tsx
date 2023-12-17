@@ -10,7 +10,7 @@ export default async function Page({
 }) {
   return (
     <main className="overflow-hidden">
-      <HeroSecondary />
+      {/* <HeroSecondary /> */}
       <ContactUsWrapper />
     </main>
   );

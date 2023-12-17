@@ -4,7 +4,6 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
 const Navbar = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -23,9 +22,9 @@ const Navbar = () => {
               alt="Motech MotorsLogo"
               width={80}
               height={30}
-              className="object-contain mt-[0px] md:h-[30px] md:w-[100px] lg:h-[50px] lg:w-[100px]"
+              className="object-contain mt-[0px] md:h-[30px] md:w-[100px] lg:h-[50px] lg:w-[100px] mr-1"
             />
-            <h1 className="lg:text-[30px] text-[24px] font-bold">Motech</h1>
+            <h1 className="lg:text-[30px] text-[24px] text-white">Motech Motors</h1>
           </Link>
           <button
             type="button"
@@ -64,7 +63,7 @@ const Navbar = () => {
                   textDecoration: "underline",
                 }),
               }}
-              className="mx-2 lg:mx-4 hover:underline underline-offset-4 mt-1 mb-1"
+              className={"mx-2 lg:mx-4 hover:underline underline-offset-4 mt-1 mb-1 "}
             >
               Home
             </Link>
@@ -72,7 +71,7 @@ const Navbar = () => {
               target="_"
               href="https://www.motechautocentre.co.uk/"
               style={{
-                color: pathname.endsWith("/mot-services") ? "black" : "white",
+                color: pathname.endsWith("/mot-services") ? "#daa520" : "white",
                 ...(pathname.endsWith("/mot-services") && {
                   textDecoration: "underline",
                 }),
@@ -84,7 +83,7 @@ const Navbar = () => {
             <Link
               href="/warranty"
               style={{
-                color: pathname.endsWith("/warranty") ? "black" : "white",
+                color: pathname.endsWith("/warranty") ? "#daa520" : "white",
                 ...(pathname.endsWith("/warranty") && {
                   textDecoration: "underline",
                 }),
@@ -96,7 +95,7 @@ const Navbar = () => {
             <Link
               href="/about-us"
               style={{
-                color: pathname.endsWith("/about-us") ? "black" : "white",
+                color: pathname.endsWith("/about-us") ? "#daa520": "white",
                 ...(pathname.endsWith("/about-us") && {
                   textDecoration: "underline",
                 }),
@@ -108,7 +107,7 @@ const Navbar = () => {
             <Link
               href="/contact-us"
               style={{
-                color: pathname.endsWith("/contact-us") ? "black" : "white",
+                color: pathname.endsWith("/contact-us") ? "#daa520" : "white",
                 ...(pathname.endsWith("/contact-us") && {
                   textDecoration: "underline",
                 }),

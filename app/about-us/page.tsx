@@ -9,9 +9,9 @@ export default async function Home({
 }) {
   return (
     <main className="overflow-hidden">
-      <HeroSecondary />
-      <section className="mt-12 padding-x padding-y max-width">
-        <div className="flex flex-wrap -mx-4">
+      {/* <HeroSecondary /> */}
+      <section className="mt-20">
+        <div className="flex flex-wrap -mx-4 py-8 px-4 sm:py-16 lg:px-6">
           {/* <!-- Contact Information --> */}
           <div className="px-4 lg:w-1/2">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">About us</h2>
