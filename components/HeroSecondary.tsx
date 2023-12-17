@@ -24,12 +24,12 @@ const HeroSecondary = () => {
           Motech Motors
         </h1>
         <ul className="ml-5 hero__subtitle list-disc">
-          <li className="ml-6">
+          <li>
             Minimum 3 months RAC warranty<b>*</b>
           </li>
-          <li className="ml-6">12 months free breakdown cover</li>
-          <li className="ml-6">Vehicle History Check</li>
-          <li className="ml-6">
+          <li>12 months free breakdown cover</li>
+          <li>Vehicle History Check</li>
+          <li>
             Drive away same day<b>*</b>
           </li>
         </ul>
