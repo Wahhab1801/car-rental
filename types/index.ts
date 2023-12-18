@@ -31,6 +31,7 @@ export interface FilterCarProps {
   limit: number;
   model: string;
   condition: string;
+  unlist: boolean;
 }
 
 export interface OptionProps {

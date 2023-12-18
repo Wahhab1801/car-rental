@@ -37,6 +37,9 @@ export const fetchCarsAxios = (filters: FilterCarProps) => {
   if (filters?.model) params.append("modelFamily", filters.model);
   if (filters?.fuel) params.append("fuel", filters.fuel);
   if (filters!["year[gte]"]) params.append("year[gte]", filters!["year[gte]"]);
+  if (filters.unlist !== undefined)
+    params.append("unlist", String(filters.unlist));
+
   return axios.get(
     `${baseUrl}/vehicles?skip=0${params ? "&" + params.toString() : ""}`
   );

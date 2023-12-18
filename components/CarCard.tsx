@@ -30,6 +30,7 @@ const CarCard = ({ car }: CarCardProps) => {
     price,
     title,
     ulezCompliant,
+    sold,
   } = car;
 
   const router = useRouter();
@@ -48,11 +49,22 @@ const CarCard = ({ car }: CarCardProps) => {
   return (
     <div className="car-card group">
       <div className="car-card__content">
-        <h2 className="car-card__content-title">
-          {make} {model}
-        </h2>
+        {sold ? (
+          <>
+            <h3 className="car-card__content-title">
+              {make} {model}
+            </h3>
+            <Image src={"/sold-bg.svg"} width={60} height={50} alt="tire" />
+          </>
+        ) : (
+          <>
+            <h2 className="car-card__content-title">
+              {make} {model}
+            </h2>
+          </>
+        )}
       </div>
-      <p className="flex mt-6 text-[32px] font-extrabold">
+      <p className="flex mt-1 text-[32px] font-extrabold">
         <span className="self-start text-[14px] font-semibold">£</span>
         {price}
       </p>

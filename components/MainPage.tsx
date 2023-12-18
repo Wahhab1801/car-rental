@@ -19,6 +19,8 @@ const MainPage = (props: Props) => {
   const cars: Vehicle[] = data?.data || [];
   const isDataEmpty = !Array.isArray(cars) || cars.length === 0 || !cars;
   useEffect(() => {
+    searchParams.unlist = false;
+
     fetchCarsAxios(searchParams)
       .then((response) => {
         setData(response.data);
