@@ -8,6 +8,53 @@ type Props = {
 };
 
 const GalleryNew = (props: Props) => {
+
+  let xDown: number = 0;
+  let yDown: number = 0;
+
+  function getTouches(evt: any) {
+    return (
+      evt.touches || // browser API
+      evt.originalEvent.touches
+    ); // jQuery
+  }
+
+  function handleTouchStart(evt: any) {
+    const firstTouch = getTouches(evt)[0];
+    xDown = firstTouch.clientX;
+    yDown = firstTouch.clientY;
+  }
+
+  function handleTouchMove(evt: any) {
+    if (!xDown || !yDown) {
+      return;
+    }
+
+    const xUp = evt.touches[0].clientX;
+    const yUp = evt.touches[0].clientY;
+
+    const xDiff = xDown - xUp;
+    const yDiff = yDown - yUp;
+
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+      /*most significant*/
+      if (xDiff > 0) {
+        nextSlide();
+      } else {
+        previousSlide();
+      }
+    } else {
+      if (yDiff > 0) {
+        /* down swipe */
+      } else {
+        /* up swipe */
+      }
+    }
+    /* reset values */
+    xDown = 0;
+    yDown = 0;
+  }
+
   const { images } = props;
   const [current, setCurrent] = useState<number>(0);
 
@@ -37,11 +84,14 @@ const GalleryNew = (props: Props) => {
     <>
       <div
         id="default-carousel"
-        className="relative w-full"
-        data-carousel="static"
+        className="relative w-full h-full"
+        data-carousel="slide"
       >
         {/* <!-- Carousel wrapper --> */}
-        <div className="relative h-56 overflow-hidden rounded-lg md:h-96 border border-gray-200 mb-4">
+        <div
+          className="relative overflow-hidden rounded-lg lg:h-96 border border-gray-200 mb-4"
+          style={{ height: "33rem" }}
+        >
           {images &&
             images.map((image, index) => (
               <div
@@ -50,11 +100,14 @@ const GalleryNew = (props: Props) => {
                 }`}
                 data-carousel-item={index === current}
                 key={image}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
               >
                 <AdvancedImage
                   key={index}
+                  className="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                   cldImg={cld.image(image)}
-                  plugins={[responsive(), placeholder()]}
+                  plugins={[responsive(), placeholder({ mode: "blur" })]}
                 />
               </div>
             ))}
@@ -133,58 +186,5 @@ const GalleryNew = (props: Props) => {
     </>
   );
 };
-
-// const GalleryNew = (props: Props) => {
-//   console.log("GalleryNew: ", props, cloudinaryCloudName);
-//   const { images } = props;
-//   const [currentImage, setCurrentImage] = React.useState(0);
-//   const cld = new Cloudinary({
-//     cloud: {
-//       cloudName: "dr815brzr",
-//     },
-//   });
-
-//   return (
-//     <div>
-//       <div className="grid gap-4">
-//         <div className="bg-gray-100 rounded-xl flex justify-center items-center shadow">
-//           <Carousel
-//             showArrows={true}
-//             selectedItem={currentImage}
-//             onChange={(index: number) => setCurrentImage(index)}
-//             className="h-[480px] max-w-full rounded-lg"
-//             showThumbs={false}
-//           >
-//             {images &&
-//               images.map((image, index) => (
-//                 <AdvancedImage
-//                   key={index}
-//                   cldImg={cld.image(image)}
-//                   plugins={[responsive(), placeholder()]}
-//                   className="h-auto max-w-full rounded-lg"
-//                 />
-//               ))}
-//           </Carousel>
-//         </div>
-//         <div className="flex justify-center gap-2">
-//           {images &&
-//             images.map((image, index) => (
-//               <div
-//                 className={`rounded-xl flex justify-center items-center h-32 w-48 bg-gray-100 cursor-pointer hover:bg-gray-200 hover:shadow-md ${
-//                   currentImage === index ? "border border-gray-500" : ""
-//                 }`}
-//               >
-//                 <AdvancedImage
-//                   cldImg={cld.image(image)}
-//                   plugins={[responsive(), placeholder()]}
-//                   onClick={() => setCurrentImage(index)}
-//                 />
-//               </div>
-//             ))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
 
 export default GalleryNew;

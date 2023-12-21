@@ -12,29 +12,24 @@ const DetailsPage = (props: Params) => {
   const [car, setCar] = React.useState<Vehicle>({} as Vehicle);
 
   useEffect(() => {
-    console.log("DetailsPage useEffect");
     fetchCar(props.id).then((car) => {
       console.log("DetailsPage useEffect fetchCar: ", car);
       setCar(car);
     });
-  }, []);
-
-  console.log("DetailsPage: car ", car);
+  }, [props.id]);
 
   return (
     <>
       <div className="mx-auto max-w-screen-2xl px-4">
-        <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 md:p-12 lg:flex-row lg:gap-8">
-          <div className="h-full w-full basis-full lg:basis-4/6">
+        <div className="flex flex-col rounded-lg bg-white p-5 md:p-5 mt-3 lg:flex-row lg:gap-8">
+          <div className="h-full w-full lg:w-2/3 lg:pr-4 mb-8 lg:mb-0">
             <GalleryNew images={car?.images} />
           </div>
-          {/* lg:w-1/2 lg:pl-4 */}
-          {/* basis-full lg:basis-2/6 */}
-          <div className="lg:w-1/2 lg:pl-4">
+          <div className="lg:w-1/3">
             <Description carData={car} />
           </div>
         </div>
-        <Suspense>{/* <RelatedProducts id={product.id} /> */}</Suspense>
+        {/* <Suspense><RelatedProducts id={product.id} /></Suspense> */}
       </div>
     </>
   );

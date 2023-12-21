@@ -37,7 +37,7 @@ const MainPage = (props: Props) => {
         <section id="cars">
           <div className="home__cars-wrapper">
             {cars.map((car) => (
-              <CarCard car={car} />
+              <CarCard car={car} key={car.id} />
             ))}
           </div>
 

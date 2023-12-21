@@ -24,6 +24,45 @@ const Description = (props: Props) => {
     condition: carData.condition,
   };
 
+  const features = [
+    {
+      id: 1,
+      label: "Year",
+      icon: "/calendar.svg",
+      text: carData.year,
+    },
+    {
+      id: 2,
+      label: "Mileage",
+      icon: "/tire.svg",
+      text: carData.mileage,
+    },
+    {
+      id: 3,
+      label: "Fuel Type",
+      icon: "/gas.svg",
+      text: carData.fuel,
+    },
+    {
+      id: 4,
+      label: "Transmission",
+      icon: "/steering-wheel.svg",
+      text: carData.transmission,
+    },
+    {
+      id: 5,
+      label: "Doors",
+      icon: undefined,
+      text: carData.doors,
+    },
+    {
+      id: 6,
+      label: "Seats",
+      icon: undefined,
+      text: carData.seats,
+    },
+  ];
+
   const closeFormModal = () => {
     setIsFormOpen(false);
   };
@@ -45,7 +84,7 @@ const Description = (props: Props) => {
       </div> */}
 
       <p className="mb-1 mt-1 font-light">{carData.title}</p>
-      <h2 className="text-5xl mb-2 mt-2 font-bold">
+      <h2 className="text-5xl mb-5 mt-2 font-bold">
         £{carData?.price?.toLocaleString()}
       </h2>
 
@@ -65,86 +104,24 @@ const Description = (props: Props) => {
         </span>
       </a>
 
-      <ul className="mt-5">
-        <li className="flex items-center mb-2">
-          <span className="w-1/2">
-            <Image
-              src={"/calendar.svg"}
-              width={20}
-              height={20}
-              alt="year"
-              className="inline mr-1"
-            />
-            Year
-          </span>
-          <span className="font-bold pl-3">{carData?.year}</span>
-        </li>
-        <hr className="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700" />
-
-        <li className="flex items-center mb-2">
-          <span className="w-1/2">
-            <Image
-              src={"/tire.svg"}
-              width={20}
-              height={20}
-              alt="tire"
-              className="inline mr-1"
-            />
-            Mileage
-          </span>
-          <span className="font-bold pl-3">
-            {carData?.mileage?.toLocaleString()} miles
-          </span>
-        </li>
-        <hr className="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700" />
-
-        <li className="flex items-center mb-2">
-          <span className="w-1/2">
-            <Image
-              src={"/gas.svg"}
-              width={20}
-              height={20}
-              alt="gas"
-              className="inline mr-1"
-            />
-            Fuel Type
-          </span>
-          <span className="font-bold pl-3">{carData?.fuel}</span>
-        </li>
-        <hr className="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700" />
-
-        <li className="flex items-center mb-2">
-          <span className="w-1/2">
-            <Image
-              src={"/steering-wheel.svg"}
-              width={20}
-              height={20}
-              alt="steering wheel"
-              className="inline mr-1"
-            />
-            Transmission
-          </span>
-          <span className="font-bold pl-3">{carData?.transmission}</span>
-        </li>
-        <hr className="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700" />
-
-        <li className="flex items-center mb-2">
-          <span className="w-1/2">Doors</span>
-          <span className="font-bold pl-3">{carData?.doors}</span>
-        </li>
-        <hr className="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700" />
-
-        <li className="flex items-center mb-2">
-          <span className="w-1/2">Seats</span>
-          <span className="font-bold pl-3">{carData?.seats}</span>
-        </li>
-        <hr className="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700" />
-
-        {/* <li className="flex items-center mb-2">
-          <span className="w-1/2">Condition</span>
-          <span className="font-bold pl-3">{carData?.condition}</span>
-        </li> */}
-        {/* <hr className="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700" /> */}
+      <ul className="mt-8 mb-8">
+        {features.map(({ text, label, icon, id }) => (
+          <li className="flex items-center mb-2 py-1 border-b-2" key={id}>
+            <span className="w-1/2">
+              {icon && (
+                <Image
+                  src={icon}
+                  width={20}
+                  height={20}
+                  alt={label?.toLowerCase()}
+                  className="inline mr-1"
+                />
+              )}
+              {label}
+            </span>
+            <span className="font-bold pl-3">{text}</span>
+          </li>
+        ))}
       </ul>
 
       <h2 className="text-2xl font-bold mt-4 lg:mt-2">Description</h2>
