@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { cloudinaryCloudName } from "@/constants";
 import { AdvancedImage, placeholder, responsive } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/url-gen/index";
+import useMobileResolution from "../useMobileResolution";
 
 type Props = {
   images: string[];
 };
 
 const GalleryNew = (props: Props) => {
-
   let xDown: number = 0;
   let yDown: number = 0;
 
@@ -57,6 +57,7 @@ const GalleryNew = (props: Props) => {
 
   const { images } = props;
   const [current, setCurrent] = useState<number>(0);
+  const isMobile = useMobileResolution();
 
   const previousSlide = () => {
     if (!images?.length) {
@@ -89,8 +90,8 @@ const GalleryNew = (props: Props) => {
       >
         {/* <!-- Carousel wrapper --> */}
         <div
-          className="relative overflow-hidden rounded-lg lg:h-96 border border-gray-200 mb-4"
-          style={{ height: "33rem" }}
+          className="relative overflow-hidden rounded-lg border border-gray-200 mb-4"
+          style={{ height: isMobile ? "20rem" : "30rem" }}
         >
           {images &&
             images.map((image, index) => (
