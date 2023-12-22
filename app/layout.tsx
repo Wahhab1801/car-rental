@@ -4,8 +4,8 @@ import { Navbar, Footer } from "@/components";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
-  title: "Car Rental",
-  description: "Explore and rent cars from the best brands in the world.",
+  title: "Motech Motors",
+  description: "Find the used cars from the best brands in the world.",
 };
 
 export default function RootLayout({
