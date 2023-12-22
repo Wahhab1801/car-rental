@@ -98,7 +98,7 @@ const AddOrUpdateCar = () => {
     <div>
       {!isAuthenticated ? (
         <div className="overflow-hidden">
-          <div className="mt-20 padding-x padding-y max-width">
+          <div className="mt-20 px-20 p-y-20 max-width">
             <p>User is not authenticated.</p>
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4 self-end"
@@ -110,7 +110,7 @@ const AddOrUpdateCar = () => {
         </div>
       ) : (
         <main className="overflow-hidden">
-          <div className="mt-20 padding-x padding-y max-width">
+          <div className="mt-20 px-5 py-5 max-width">
             <div className="p-4">
               <div
                 style={{

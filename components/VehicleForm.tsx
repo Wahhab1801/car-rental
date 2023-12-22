@@ -25,7 +25,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
   const [uwConfig] = useState({
     cloudName: cloudinaryCloudName,
     uploadPreset: cloudinaryUploadPreset,
-    cropping: true,
+    cropping: false,
     multiple: true,
   });
   const cld = new Cloudinary({
@@ -147,7 +147,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
             value={formData?.make || ""}
             onChange={handleChange}
             required
-            className="mt-1 block w-full border-solid border-2 border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full border-2 border-solid border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
         </div>
         <div>
@@ -183,7 +183,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
             name="title"
             value={formData?.title || ""}
             onChange={handleChange}
-            className="mt-1 block w-full border-solid border-2 border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full border-2 border-solid border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
         </div>
         <div>
@@ -199,7 +199,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
             name="colour"
             value={formData?.colour || ""}
             onChange={handleChange}
-            className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
         </div>
       </div>
@@ -217,7 +217,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           value={formData?.description || ""}
           onChange={handleChange}
           rows={3}
-          className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
       </div>
 
@@ -235,7 +235,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
             name="vehicleCategory"
             value={formData?.vehicleCategory || "Car"}
             onChange={handleChange}
-            className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
         </div>
         <div>
@@ -250,7 +250,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
             name="ulezCompliant"
             value={formData?.ulezCompliant ? "true" : "false"}
             onChange={handleChange}
-            className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           >
             <option value="true">Yes</option>
             <option value="false">No</option>
@@ -272,7 +272,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
             name="doors"
             value={formData?.doors || ""}
             onChange={handleChange}
-            className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
         </div>
         <div>
@@ -288,7 +288,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
             name="seats"
             value={formData?.seats || ""}
             onChange={handleChange}
-            className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
         </div>
       </div>
@@ -306,7 +306,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           name="dateOfRegistration"
           value={formData?.dateOfRegistration || ""}
           onChange={handleChange}
-          className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
       </div>
 
@@ -323,7 +323,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           name="registration"
           value={formData?.registration || ""}
           onChange={handleChange}
-          className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
       </div>
 
@@ -340,7 +340,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           name="price"
           value={formData?.price || ""}
           onChange={handleChange}
-          className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
       </div>
 
@@ -357,7 +357,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
             name="sold"
             value={formData?.sold ? "true" : "false"}
             onChange={handleChange}
-            className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           >
             <option value="true">Yes</option>
             <option value="false">No</option>
@@ -375,7 +375,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
             name="unlist"
             value={formData?.unlist ? "true" : "false"}
             onChange={handleChange}
-            className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           >
             <option value="true">Yes</option>
             <option value="false">No</option>
@@ -396,7 +396,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           name="bodyType"
           value={formData?.bodyType || ""}
           onChange={handleChange}
-          className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
       </div>
 
@@ -413,7 +413,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           name="fuel"
           value={formData?.fuel || ""}
           onChange={handleChange}
-          className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
       </div>
 
@@ -430,7 +430,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           name="transmission"
           value={formData?.transmission || ""}
           onChange={handleChange}
-          className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
       </div>
 
@@ -447,7 +447,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           name="owners"
           value={formData?.owners || ""}
           onChange={handleChange}
-          className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus-border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus-border-indigo-500 sm:text-sm"
         />
       </div>
 
@@ -464,7 +464,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           name="year"
           value={formData?.year || ""}
           onChange={handleChange}
-          className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
       </div>
 
@@ -481,7 +481,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           name="mileage"
           value={formData?.mileage || ""}
           onChange={handleChange}
-          className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
       </div>
 
@@ -498,7 +498,7 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
           name="emissionClass"
           value={formData?.emissionClass || ""}
           onChange={handleChange}
-          className="mt-1 block w-full border-solid border-2 border-solid border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full border-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
       </div>
       <div className="mt-4">

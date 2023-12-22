@@ -46,7 +46,7 @@ const LoginForm = (props: Props) => {
     }
   }
   return (
-    <div className="mt-20">
+    <div className="mt-20 py-10 px-10">
       <form
         ref={form}
         onSubmit={handleSubmit}
