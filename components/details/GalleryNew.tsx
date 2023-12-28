@@ -91,7 +91,7 @@ const GalleryNew = (props: Props) => {
         {/* <!-- Carousel wrapper --> */}
         <div
           className="relative overflow-hidden rounded-lg border border-gray-200 mb-4"
-          style={{ height: isMobile ? "20rem" : "30rem" }}
+          style={{ height: isMobile ? "20rem" : "33rem" }}
         >
           {images &&
             images.map((image, index) => (
@@ -106,7 +106,7 @@ const GalleryNew = (props: Props) => {
               >
                 <AdvancedImage
                   key={index}
-                  className="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                  className="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 h-full"
                   cldImg={cld.image(image)}
                   plugins={[responsive(), placeholder({ mode: "blur" })]}
                 />
