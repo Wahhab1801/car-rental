@@ -24,7 +24,9 @@ const Navbar = () => {
               height={30}
               className="object-contain mt-[0px] md:h-[30px] md:w-[100px] lg:h-[50px] lg:w-[100px] mr-1"
             />
-            <h1 className="lg:text-[30px] text-[24px] text-white">Motech Motors</h1>
+            <h1 className="lg:text-[30px] text-[24px] text-white">
+              Motech Motors
+            </h1>
           </Link>
           <button
             type="button"
@@ -63,7 +65,9 @@ const Navbar = () => {
                   textDecoration: "underline",
                 }),
               }}
-              className={"mx-2 lg:mx-4 hover:underline underline-offset-4 mt-1 mb-1 "}
+              className={
+                "mx-2 lg:mx-4 hover:underline underline-offset-4 mt-1 mb-1 "
+              }
             >
               Home
             </Link>
@@ -93,9 +97,21 @@ const Navbar = () => {
               Warranty
             </Link>
             <Link
+              href="/finance"
+              style={{
+                color: pathname.endsWith("/finance") ? "#daa520" : "white",
+                ...(pathname.endsWith("/finance") && {
+                  textDecoration: "underline",
+                }),
+              }}
+              className="mx-2 lg:mx-4 hover:underline underline-offset-4 mt-1 mb-1"
+            >
+              Finance
+            </Link>
+            <Link
               href="/about-us"
               style={{
-                color: pathname.endsWith("/about-us") ? "#daa520": "white",
+                color: pathname.endsWith("/about-us") ? "#daa520" : "white",
                 ...(pathname.endsWith("/about-us") && {
                   textDecoration: "underline",
                 }),
