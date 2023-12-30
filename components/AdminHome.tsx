@@ -1,19 +1,15 @@
 "use client";
 // AddOrUpdateCar.js
 import React, { useEffect, useState } from "react";
-import { VehicleForm } from "./VehicleForm";
-import Modal from "./Modal";
 import { Vehicle } from "@/types";
 import Pagination from "./Pagination";
 import CustomSelect from "./CustomSelect";
 import { baseUrl } from "@/constants";
 import { useRouter } from "next/navigation";
 
-const AddOrUpdateCar = () => {
+const AdminHome = () => {
   const router = useRouter();
-  const [isFormOpen, setIsFormOpen] = useState(false);
   const [cars, setCars] = useState<Vehicle[]>([]);
-  const [selectedCar, setSelectedCar] = useState<Vehicle | undefined>();
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [totalCount, setTotalCount] = useState<number>(5);
@@ -85,15 +81,6 @@ const AddOrUpdateCar = () => {
     fetchData();
   }, [currentPage, pageSize, selectedSold, searchTerm]);
 
-  const openFormModal = (car?: Vehicle) => {
-    setSelectedCar(car);
-    setIsFormOpen(true);
-  };
-
-  const closeFormModal = () => {
-    setIsFormOpen(false);
-  };
-
   return (
     <div>
       {!isAuthenticated ? (
@@ -120,7 +107,7 @@ const AddOrUpdateCar = () => {
                 }}
               >
                 <button
-                  onClick={() => openFormModal()}
+                  onClick={() => router.push("new-car")}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4 self-end"
                 >
                   Add Vehicle
@@ -146,18 +133,6 @@ const AddOrUpdateCar = () => {
                   </button>
                 </div>
               </div>
-              <div className="p-4">
-                <Modal
-                  header={selectedCar ? "Update Vehicle" : "Add Vehicle"}
-                  isOpen={isFormOpen}
-                  closeModal={closeFormModal}
-                >
-                  <VehicleForm
-                    vehicle={selectedCar}
-                    closeModal={closeFormModal}
-                  />
-                </Modal>
-              </div>
             </div>
             <div className="overflow-x-auto p-4">
               <table className="min-w-full bg-white">
@@ -168,6 +143,7 @@ const AddOrUpdateCar = () => {
                     <th className="text-left">Model</th>
                     <th className="text-left">Registration</th>
                     <th className="text-left">Sold</th>
+                    <th className="text-left">Unlist</th>
                     <th className="text-left">Action</th>
                   </tr>
                 </thead>
@@ -180,10 +156,11 @@ const AddOrUpdateCar = () => {
                         <td>{car.model}</td>
                         <td>{car.registration}</td>
                         <td>{car.sold ? "Yes" : "No"}</td>
+                        <td>{car.unlist ? "Yes" : "No"}</td>
                         <td>
                           <button
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                            onClick={() => openFormModal(car)}
+                            onClick={() => router.push(`new-car/${car.id}`)}
                           >
                             Update
                           </button>
@@ -221,4 +198,4 @@ const AddOrUpdateCar = () => {
   );
 };
 
-export default AddOrUpdateCar;
+export default AdminHome;

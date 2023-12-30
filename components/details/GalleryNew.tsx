@@ -108,7 +108,10 @@ const GalleryNew = (props: Props) => {
                   key={index}
                   className="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 h-full"
                   cldImg={cld.image(image)}
-                  plugins={[responsive(), placeholder({ mode: "blur" })]}
+                  plugins={[
+                    responsive(),
+                    placeholder({ mode: "blur" }),
+                  ]}
                 />
               </div>
             ))}

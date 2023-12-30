@@ -31,7 +31,7 @@ const LoginForm = (props: Props) => {
       if (response.status >= 200 && response.status < 300) {
         const newAuthToken = response.data.accessToken;
         localStorage.setItem("authToken", newAuthToken);
-        router.push("new-car");
+        router.push("admin");
       }
     } catch (error: any) {
       const response = error?.response?.data;

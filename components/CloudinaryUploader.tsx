@@ -4,9 +4,11 @@ const CloudinaryScriptContext = createContext({});
 
 const CloudinaryUploadWidget = ({
   uwConfig,
+  prevPublicIds,
   setPublicIds,
 }: {
   uwConfig: any;
+  prevPublicIds: string[];
   setPublicIds: any;
 }) => {
   const [loaded, setLoaded] = useState(false);
