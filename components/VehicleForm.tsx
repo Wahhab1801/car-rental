@@ -17,7 +17,12 @@ interface VehicleFormProps {
 }
 
 export const VehicleForm: React.FC<VehicleFormProps> = ({ id: vehicleId }) => {
-  const authToken = localStorage.getItem("authToken");
+  const [authToken, setAuthToken] = useState("");
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) setAuthToken(token);
+    else router.push("login");
+  }, []);
 
   const router = useRouter();
   const [vehicle, setVehicle] = useState({} as Vehicle);

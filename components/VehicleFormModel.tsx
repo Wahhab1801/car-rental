@@ -28,12 +28,18 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({
     cropping: false,
     multiple: true,
   });
+  const [authToken, setAuthToken] = useState("");
+  
   const cld = new Cloudinary({
     cloud: {
       cloudName: cloudinaryCloudName,
     },
   });
-  const authToken = localStorage.getItem("authToken");
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) setAuthToken(token);
+  }, []);
 
   useEffect(() => {
     if (vehicle) {
