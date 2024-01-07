@@ -517,7 +517,6 @@ export const VehicleForm: React.FC<VehicleFormProps> = ({ id: vehicleId }) => {
             </label>
             <CloudinaryUploadWidget
               uwConfig={uwConfig}
-              prevPublicIds={publicIds}
               setPublicIds={setPublicIds}
             />
             <div style={{ display: "flex", flexWrap: "wrap" }}>

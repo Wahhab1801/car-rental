@@ -73,6 +73,7 @@ const CarCard = ({ car }: CarCardProps) => {
         selectedItem={currentImage}
         onChange={(index) => setCurrentImage(index)}
         showThumbs={false}
+        showIndicators={false}
       >
         {images?.map((image, index) => (
           <div key={index}>

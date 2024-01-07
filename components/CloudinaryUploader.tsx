@@ -4,11 +4,9 @@ const CloudinaryScriptContext = createContext({});
 
 const CloudinaryUploadWidget = ({
   uwConfig,
-  prevPublicIds,
   setPublicIds,
 }: {
   uwConfig: any;
-  prevPublicIds: string[];
   setPublicIds: any;
 }) => {
   const [loaded, setLoaded] = useState(false);
@@ -35,8 +33,8 @@ const CloudinaryUploadWidget = ({
         uwConfig,
         (error: any, result: any) => {
           if (!error && result && result.event === "success") {
-            setPublicIds((prevPublicIds: string[]) => [
-              ...prevPublicIds,
+            setPublicIds((prevIds: string[] = []) => [
+              ...prevIds,
               result.info.public_id,
             ]);
           }
